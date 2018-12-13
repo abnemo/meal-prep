@@ -5,9 +5,10 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { WeekPrepComponent } from './week-prep/week-prep.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', component: RecipeComponent },
+  { path: '', component: DashboardComponent },
   { path: 'recipe', component: RecipeComponent },
   { path: 'pantry', component: PantryComponent },
   { path: 'recipe-list', component: RecipeListComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
     RecipeComponent,
     RecipeListComponent,
     ShoppingListComponent,
-    WeekPrepComponent
+    WeekPrepComponent,
+    DashboardComponent
   ],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
