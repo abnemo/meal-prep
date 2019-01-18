@@ -1,0 +1,13 @@
+.form-card {
+  display: flex;
+  justify-content: center;
+}
+
+.test {
+  display: flex;
+  flex-direction: column;
+}
+
+.test>* {
+  width: 100%;
+}

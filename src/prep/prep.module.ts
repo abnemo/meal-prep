@@ -6,6 +6,8 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { WeekPrepComponent } from './week-prep/week-prep.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MaterialModule } from '../app/material.module';
+
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -25,7 +27,10 @@ const routes: Routes = [
     WeekPrepComponent,
     DashboardComponent
   ],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    MaterialModule,
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule]
 })
-export class PagesModule { }
+export class PrepModule { }
