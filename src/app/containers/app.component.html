@@ -1,1 +1,17 @@
-<app-main-nav></app-main-nav>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav class="sidenav" role='navigation' fixedInViewport="true" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <mat-toolbar color="primary" class="example-toolbar">
+      <h1 class="example-app-name">Menu</h1>
+    </mat-toolbar>
+    <app-nav-sidenav (closeSidenav)='sidenav.close()'></app-nav-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-nav-toolbar (sidenavToggle)='sidenav.toggle()'></app-nav-toolbar>
+    <main>
+      <h2>
+        {{user$ | async | json}}
+      </h2>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

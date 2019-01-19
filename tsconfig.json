@@ -3,11 +3,11 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths":  {
-      "app": ["src/app/*"],
-      "assets": ["src/assets/*"],
-      "auth": ["src/auth/*"],
-      "environments": ["src/environments/*"],
-      "pages": ["src/pages/*"]
+      "app": ["app/*"],
+      "assets": ["assets/*"],
+      "auth": ["auth/*"],
+      "environments": ["environments/*"],
+      "prep": ["prep/*"]
     },
     "sourceMap": true,
     "declaration": false,
