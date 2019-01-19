@@ -1,16 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RecipeComponent } from './recipe.component';
+import {RecipeComponent} from './recipe.component';
 
 describe('RecipeComponent', () => {
   let component: RecipeComponent;
   let fixture: ComponentFixture<RecipeComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ RecipeComponent ]
-    })
-    .compileComponents();
+    TestBed.configureTestingModule({declarations: [RecipeComponent]})
+        .compileComponents();
   }));
 
   beforeEach(() => {

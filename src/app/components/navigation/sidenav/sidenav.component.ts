@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav-sidenav',
@@ -10,16 +10,13 @@ import { Observable } from 'rxjs';
 })
 
 export class SidenavComponent {
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches)
-    );
+  isHandset$: Observable<boolean> =
+      this.breakpointObserver.observe(Breakpoints.Handset)
+          .pipe(map(result => result.matches));
 
   @Output() closeSidenav = new EventEmitter<void>();
 
-  constructor(
-    private breakpointObserver: BreakpointObserver
-  ) { }
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
   onClose() {
     this.isHandset$.subscribe(value => {

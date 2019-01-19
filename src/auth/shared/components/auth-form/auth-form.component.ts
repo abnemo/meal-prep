@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-auth-form',
@@ -8,20 +8,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class AuthFormComponent implements OnInit {
-
-  form = this.fb.group({
-    email: ['', Validators.email],
-    password: ['', Validators.required]
-  });
+  form = this.fb.group(
+      {email: ['', Validators.email], password: ['', Validators.required]});
 
   @Output() submitted = new EventEmitter<FormGroup>();
 
-  constructor(
-    private fb: FormBuilder
-  ) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onSubmit() {
     if (this.form.valid) {
@@ -38,5 +32,4 @@ export class AuthFormComponent implements OnInit {
     const control = this.form.get('email');
     return control.hasError('email') && control.touched;
   }
-
 }
