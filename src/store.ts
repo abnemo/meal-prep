@@ -6,7 +6,7 @@ import {pluck} from 'rxjs/operators';
 import {User} from './auth/shared/services/auth/auth.service';
 
 export interface State {
-  user: User;
+  user: User|undefined;
   [key: string]: any;
 }
 

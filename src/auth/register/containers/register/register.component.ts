@@ -11,7 +11,7 @@ import {AuthService} from '../../../shared/services/auth/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  error: string;
+  error!: string;
 
   constructor(private authService: AuthService, private router: Router) {}
 

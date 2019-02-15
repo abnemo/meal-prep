@@ -10,7 +10,7 @@ import {AuthService} from '../../../shared/services/auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  error: string;
+  error!: string;
 
   constructor(private authService: AuthService, private router: Router) {}
 

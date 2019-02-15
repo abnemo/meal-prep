@@ -6,6 +6,8 @@ import {MaterialModule} from '../../app/material.module';
 
 // conponents
 import {AuthFormComponent} from './components/auth-form/auth-form.component';
+// guards
+import {AuthGuard} from './guards/auth.guard';
 // services
 import {AuthService} from './services/auth/auth.service';
 
@@ -17,6 +19,6 @@ import {AuthService} from './services/auth/auth.service';
 
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
-    return {ngModule: SharedModule, providers: [AuthService]};
+    return {ngModule: SharedModule, providers: [AuthService, AuthGuard]};
   }
 }

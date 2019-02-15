@@ -5,7 +5,6 @@ import {AngularFireModule, FirebaseAppConfig} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {RouterModule, Routes} from '@angular/router';
-
 import {MaterialModule} from '../app/material.module';
 
 // shared modules

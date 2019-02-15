@@ -1,8 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav class="sidenav" role='navigation' fixedInViewport="true" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary" class="example-toolbar">
-      <h1 class="example-app-name">Menu</h1>
-    </mat-toolbar>
+    <!-- <mat-sidenav #sidenav class='sidenav' role='nagvigation'> -->
+    <h3 class='title'>
+      Menu
+    </h3>
     <app-nav-sidenav (closeSidenav)='sidenav.close()'></app-nav-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -11,7 +12,7 @@
       <h2>
         {{user$ | async | json}}
       </h2>
-      <router-outlet></router-outlet>
     </main>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

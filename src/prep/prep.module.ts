@@ -1,30 +1,48 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'auth/shared/guards/auth.guard';
+import { LoginLayoutComponent } from 'app/components/layouts/login-layout/login-layout.component';
 
-import {MaterialModule} from '../app/material.module';
-
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {PantryComponent} from './pantry/pantry.component';
-import {RecipeListComponent} from './recipe-list/recipe-list.component';
-import {RecipeComponent} from './recipe/recipe.component';
-import {ShoppingListComponent} from './shopping-list/shopping-list.component';
-import {WeekPrepComponent} from './week-prep/week-prep.component';
-
+import { MaterialModule } from '../app/material.module';
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent},
-  {path: 'recipe', component: RecipeComponent},
-  {path: 'pantry', component: PantryComponent},
-  {path: 'recipe-list', component: RecipeListComponent},
-  {path: 'shopping-list', component: ShoppingListComponent},
-  {path: 'week-prep', component: WeekPrepComponent}
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
+  },
+  {
+    path: '',
+    component: LoginLayoutComponent
+  },
+  {
+    path: 'recipe',
+    canActivate: [AuthGuard],
+    loadChildren: './recipe/recipe.module#RecipeModule'
+  },
+  {
+    path: 'pantry',
+    canActivate: [AuthGuard],
+    loadChildren: './pantry/pantry.module#PantryModule'
+  },
+  {
+    path: 'recipe-list',
+    canActivate: [AuthGuard],
+    loadChildren: './recipe-list/recipe-list.module#RecipeListModule'
+  },
+  {
+    path: 'shopping-list',
+    canActivate: [AuthGuard],
+    loadChildren: './shopping-list/shopping-list.module#ShoppingListModule'
+  },
+  {
+    path: 'week-prep',
+    canActivate: [AuthGuard],
+    loadChildren: './week-prep/week-prep.module#WeekPrepModule'
+  }
 ];
 
 @NgModule({
-  declarations: [
-    PantryComponent, RecipeComponent, RecipeListComponent,
-    ShoppingListComponent, WeekPrepComponent, DashboardComponent
-  ],
   imports: [MaterialModule, RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

@@ -1,6 +1,7 @@
 {
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
+    "target": "es5",
     "rootDir": ".",
     "outDir": "./dist/out-tsc",
     "baseUrl": "src",
@@ -14,6 +15,7 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
     "typeRoots": [
       "node_modules/@types"
     ],
