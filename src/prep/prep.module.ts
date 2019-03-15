@@ -1,49 +1,58 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'auth/shared/guards/auth.guard';
-import { LoginLayoutComponent } from 'app/components/layouts/login-layout/login-layout.component';
 
+//components
+import { HomeLayoutComponent } from 'auth/layouts/home-layout/home-layout.component';
+import { SidenavComponent } from 'app/components/navigation/sidenav/sidenav.component';
+import { ToolbarComponent } from 'app/components/navigation/toolbar/toolbar.component';
+
+// guards
+import { AuthGuard } from 'auth/shared/guards/auth.guard';
+// shared Modules
 import { MaterialModule } from '../app/material.module';
+import { SharedModule } from 'prep/shared/shared.module';
 
 const routes: Routes = [
   {
-    path: '',
-    canActivate: [AuthGuard],
-    loadChildren: './dashboard/dashboard.module#DashboardModule'
-  },
-  {
-    path: '',
-    component: LoginLayoutComponent
-  },
-  {
-    path: 'recipe',
-    canActivate: [AuthGuard],
-    loadChildren: './recipe/recipe.module#RecipeModule'
-  },
-  {
-    path: 'pantry',
-    canActivate: [AuthGuard],
-    loadChildren: './pantry/pantry.module#PantryModule'
-  },
-  {
-    path: 'recipe-list',
-    canActivate: [AuthGuard],
-    loadChildren: './recipe-list/recipe-list.module#RecipeListModule'
-  },
-  {
-    path: 'shopping-list',
-    canActivate: [AuthGuard],
-    loadChildren: './shopping-list/shopping-list.module#ShoppingListModule'
-  },
-  {
-    path: 'week-prep',
-    canActivate: [AuthGuard],
-    loadChildren: './week-prep/week-prep.module#WeekPrepModule'
+    path: '', canActivate: [AuthGuard], component: HomeLayoutComponent,
+    children: [
+      {
+        path: '',
+        canActivate: [AuthGuard],
+        loadChildren: './dashboard/dashboard.module#DashboardModule'
+      },
+      // {
+      //   path: 'recipe',
+      //   canActivate: [AuthGuard],
+      //   loadChildren: './recipe/recipe.module#RecipeModule'
+      // },
+      {
+        path: 'recipes',
+        canActivate: [AuthGuard],
+        loadChildren: './recipes/recipes.module#RecipesModule'
+      },
+      {
+        path: 'pantry',
+        canActivate: [AuthGuard],
+        loadChildren: './pantry/pantry.module#PantryModule'
+      },
+      {
+        path: 'shoppinglist',
+        canActivate: [AuthGuard],
+        loadChildren: './shopping-list/shopping-list.module#ShoppingListModule'
+      },
+      {
+        path: 'weekprep',
+        canActivate: [AuthGuard],
+        loadChildren: './week-prep/week-prep.module#WeekPrepModule'
+      }
+    ]
   }
 ];
 
 @NgModule({
-  imports: [MaterialModule, RouterModule.forRoot(routes)],
+  declarations: [HomeLayoutComponent, SidenavComponent, ToolbarComponent],
+  imports: [MaterialModule, RouterModule.forRoot(routes), SharedModule.forRoot()],
   exports: [RouterModule]
 })
 export class PrepModule {

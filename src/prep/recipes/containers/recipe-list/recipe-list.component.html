@@ -1,0 +1,23 @@
+<!-- <h1>recipe works! {{recipes | async | json}}
+</h1> -->
+<div class='recipeList'>
+  <div class='recipes__title'>
+    <h2>
+      Your recipes
+    </h2>
+    <a class='btn__add' routerLink="../recipes/new">
+      <mat-icon>add_circle</mat-icon> New Recipe
+    </a>
+  </div>
+  <div *ngIf='recipes$ | async as recipes; else loading;'>
+    <div class='message' *ngIf='!recipes.length'>
+      No recipes, add a new recipe to start.
+    </div>
+    <ng-template #loading>
+      <div class="message">
+        Fetching meals..
+      </div>
+    </ng-template>
+
+  </div>
+</div>

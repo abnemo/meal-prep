@@ -6,9 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: []
 })
 
-export class LoginLayoutComponent implements OnInit {
+export class LoginLayoutComponent {
 
   constructor() { }
-
-  ngOnInit() { }
 }

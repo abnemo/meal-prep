@@ -32,8 +32,7 @@ export class SidenavComponent {
   }
 
   async logout() {
-    console.log('logout!');
     await this.authService.logoutUser();
-    this.router.navigate(['auth/login']);
+    this.router.navigate(['login']);
   }
 }

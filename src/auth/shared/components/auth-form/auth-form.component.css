@@ -1,13 +1,23 @@
 .form-card {
   display: flex;
   justify-content: center;
+  height: 100%;
+  padding-top: 150px;
 }
 
-.test {
+.form {
   display: flex;
   flex-direction: column;
 }
 
-.test>* {
+.form>* {
   width: 100%;
+}
+
+.container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
 }

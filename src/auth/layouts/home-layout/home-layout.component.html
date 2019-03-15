@@ -1,4 +1,4 @@
-<!-- <mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav class="sidenav" role='navigation' fixedInViewport="true" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <h3 class='title'>
       Menu
@@ -12,6 +12,6 @@
         {{user$ | async | json}}
       </h2>
     </main>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
-</mat-sidenav-container> -->
-<router-outlet></router-outlet>
+</mat-sidenav-container>

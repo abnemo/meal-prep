@@ -1,17 +1,20 @@
-import {Observable} from 'rxjs';
-import {BehaviorSubject} from 'rxjs';
-import {distinctUntilChanged} from 'rxjs/operators';
-import {pluck} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { pluck } from 'rxjs/operators';
 
-import {User} from './auth/shared/services/auth/auth.service';
+import { User } from './auth/shared/services/auth/auth.service';
+import { Recipe } from 'prep/shared/services/recipe.service';
 
 export interface State {
-  user: User|undefined;
+  user: User | undefined;
+  recipesList: Recipe[] | undefined;
   [key: string]: any;
 }
 
 const state: State = {
-  user: undefined
+  user: undefined,
+  recipesList: undefined
 };
 
 export class Store {
@@ -27,6 +30,6 @@ export class Store {
   }
 
   set(name: string, stat: any) {
-    this.subject.next({...this.value, [name]: stat});
+    this.subject.next({ ...this.value, [name]: stat });
   }
 }

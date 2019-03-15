@@ -6,9 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes } from '@angular/router';
 import { environment } from 'environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { SidenavComponent } from 'app/components/navigation/sidenav/sidenav.component';
-import { ToolbarComponent } from 'app/components/navigation/toolbar/toolbar.component';
-import { LoginLayoutComponent } from 'app/components/layouts/login-layout/login-layout.component';
 
 // feature
 import { AuthModule } from 'auth/auth.module';
@@ -23,7 +20,7 @@ export const ROUTES: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, SidenavComponent, ToolbarComponent, LoginLayoutComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule, BrowserAnimationsModule, PrepModule, HttpClientModule,
     ServiceWorkerModule.register(
