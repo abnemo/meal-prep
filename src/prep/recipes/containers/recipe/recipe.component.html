@@ -1,6 +1,10 @@
-<p>
-  recipe-list works!
-</p>
 <div class="recipe">
-  I am a meal
+  <div class="recipe__title">
+    <h3>
+      <span>Create Recipe</span>
+    </h3>
+  </div>
+  <div>
+    <recipe-form (create)='addRecipe($event)'></recipe-form>
+  </div>
 </div>

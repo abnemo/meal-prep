@@ -1,0 +1,49 @@
+<div class="recipe-form">
+  <form [formGroup]='recipeForm' (ngSubmit)='onSubmit(recipeForm.value)'>
+
+    <mat-form-field class="form-input">
+      <input matInput placeholder="Recipe title" formControlName='recipeTitle'>
+    </mat-form-field>
+
+    <mat-card-title>
+      <h6>
+        <span>Ingredients</span>
+      </h6>
+      <div class="">
+        <h6>
+          <span>Add ingredient</span>
+          <mat-icon (click)="addIngredient()">add_circle_outline</mat-icon>
+        </h6>
+      </div>
+    </mat-card-title>
+    <div formArrayName='ingredients'>
+      <div *ngFor="let ingredient of recipeForm.controls.ingredients.controls; let i=index">
+        <div class="form-input" [formGroupName]="i">
+          <mat-form-field class="form-input">
+            <input matInput placeholder="Ingredient" formControlName='ingredientName'>
+          </mat-form-field>
+          <mat-form-field class="form-input">
+            <input matInput placeholder="quantity" formControlName='quantity'>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName='quantType' placeholder="Select">
+              <mat-option *ngFor='let quantType of quantityTypeArray' [value]='quantType'>{{quantType}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-icon (click)="deleteIngredient(i)">remove_circle_outline</mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <mat-form-field>
+      <textarea matInput placeholder="Instructions" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" formControlName='instructions'>
+    </textarea>
+    </mat-form-field>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="recipeForm.invalid" color="primary">Submit</button>
+      <button color="primary" [routerLink]='["../"]'>Cancel</button>
+    </mat-card-actions>
+    <mat-error class="error" *ngIf='requiredTitle'>Recipe name is required</mat-error>
+  </form>
+</div>

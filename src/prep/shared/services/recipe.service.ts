@@ -9,9 +9,8 @@ import { AuthService } from 'auth/shared/services/auth/auth.service';
 export interface Recipe {
   name: string;
   ingredients: string[];
-  timestamp: number;
+  instructions: string;
   $key: string;
-  $exists: () => boolean;
 }
 
 @Injectable()
@@ -28,4 +27,13 @@ export class RecipeService {
   get uid() {
     return this.authService.user!.uid;
   }
+
+  addRecipe(recipe: Recipe) {
+    console.log(this.uid);
+    this.db.list(`recipeList/${this.uid}`).push(recipe);
+  }
+
+  // deleteRecipe(recipe: Recipe) {
+  //   this.db.list(`recipeList/${this.uid}`).delete(recipe)
+  // }
 }
