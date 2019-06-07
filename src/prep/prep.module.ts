@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 //components
-import { HomeLayoutComponent } from 'auth/layouts/home-layout/home-layout.component';
+import { HomeLayoutComponent } from 'app/components/layouts/home-layout/home-layout.component';
 import { SidenavComponent } from 'app/components/navigation/sidenav/sidenav.component';
 import { ToolbarComponent } from 'app/components/navigation/toolbar/toolbar.component';
 

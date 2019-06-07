@@ -1,26 +1,33 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { AuthService } from '../../../shared/services/auth/auth.service';
+import { AuthService } from 'auth/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  error!: string;
+  loginForm = this.fb.group(
+    { email: ['', Validators.email], password: ['', Validators.required] });
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService, private router: Router,
+    private fb: FormBuilder) { }
 
-  async loginUser(event: FormGroup) {
-    const { email, password } = event.value;
-    try {
-      await this.authService.loginUser(email, password);
-      this.router.navigate(['']);
-    } catch (err) {
-      this.error = err.message;
-    }
+  onSubmit(form: FormGroup) {
+    this.authService.login(form.value)
+      .subscribe(res => this.router.navigate(['/']), err => console.log(err));
+  }
+
+  get passwordInvalid() {
+    const control = this.loginForm.get('password');
+    return control!.hasError('required') && control!.touched;
+  }
+
+  get emailFormat() {
+    const control = this.loginForm.get('email');
+    return control!.hasError('email') && control!.touched;
   }
 }

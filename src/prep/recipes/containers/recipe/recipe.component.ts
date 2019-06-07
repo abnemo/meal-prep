@@ -16,7 +16,7 @@ export class RecipeComponent {
 
   async addRecipe(event: Recipe) {
     console.log('Reicpe', event);
-    await this.recipeService.addRecipe(event);
+    // await this.recipeService.addRecipe(event);
     this.backToRecipes();
   }
 

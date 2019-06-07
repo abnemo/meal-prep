@@ -1,8 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav class="sidenav" role='navigation' fixedInViewport="true" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
-    <h3 class='title'>
-      Menu
-    </h3>
+  <mat-sidenav color='primary' #sidenav class="sidenav" role='navigation' fixedInViewport="true"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <mat-toolbar color='primary'>
+      <span>Menu</span>
+    </mat-toolbar>
     <app-nav-sidenav (closeSidenav)='sidenav.close()'></app-nav-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>

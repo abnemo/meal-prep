@@ -1,53 +1,84 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { tap } from 'rxjs/operators';
-import { Store } from 'store';
-import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'environments/environment';
+import { Observable, throwError as observableThrowError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 export interface User {
   email: string | null;
-  uid: string;
+  password: string;
+  branch: string;
   authenticated: boolean;
 }
 
 @Injectable()
 export class AuthService {
-  auth$ = this.af.authState.pipe(tap(next => {
-    if (!next) {
-      this.store.set('user', null);
-      return;
+  token!: string | null;
+
+  constructor(
+    private http: HttpClient, private router: Router,
+    private jwtHelper: JwtHelperService) { }
+
+  login(login: any): Observable<boolean> {
+    return this.http.post(`${environment.API}/v1/account/login`, login)
+      .pipe(map(this.handleToken), catchError(this.handleError));
+  }
+
+  register(registration: any): Observable<boolean> {
+    return this.http
+      .post(`${environment.API}/v1/account/register`, registration)
+      .pipe(map(this.handleToken), catchError(this.handleError));
+  }
+
+  logout(): void {
+    this.token = null;
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
+
+  updateRole(): void {
+    this.token = localStorage.getItem('token');
+    if (this.token) {
+      this.http.get(`${environment.API}/v1/account/update`)
+        .subscribe((res: any) => {
+          if (res.token) this.handleToken(res);
+        });
     }
-    const user: User = { email: next.email, uid: next.uid, authenticated: true };
-    this.store.set('user', user);
-  }));
-  private loggedIn = new BehaviorSubject<boolean>(false);
-
-
-  constructor(private store: Store, private af: AngularFireAuth) { }
-
-  get isLoggedIn() {
-    return this.loggedIn.asObservable();
   }
 
-  get authState() {
-    return this.af.authState;
+  loggedIn(): boolean {
+    this.token = localStorage.getItem('token');
+    return this.token != null && !this.jwtHelper.isTokenExpired(this.token);
   }
 
-  get user() {
-    return this.af.auth.currentUser;
+  payload(): any {
+    const token = localStorage.getItem('token');
+    return token ? this.jwtHelper.decodeToken(token) : 401;
   }
 
-  createUser(email: string, password: string) {
-    return this.af.auth.createUserWithEmailAndPassword(email, password);
+  private handleToken(res: Response | any) {
+    const token = res && res['token'];
+    if (token) {
+      this.token = token;
+      localStorage.setItem('token', token);
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  loginUser(email: string, password: string) {
-    this.loggedIn.next(true);
-    return this.af.auth.signInWithEmailAndPassword(email, password);
-  }
-
-  logoutUser() {
-    this.loggedIn.next(false);
-    return this.af.auth.signOut();
+  private handleError(error: Response | any) {
+    let errMsg: any;
+    if (error instanceof Response) {
+      errMsg = { status: error.status, msg: error };
+    } else {
+      errMsg = {
+        status: 500,
+        msg: error.message ? error.message : error.toString()
+      };
+    }
+    return observableThrowError(errMsg);
   }
 }

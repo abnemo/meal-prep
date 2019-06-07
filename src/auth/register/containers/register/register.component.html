@@ -1,8 +1,39 @@
-<div>
-  <app-auth-form (submitted)='registerUser($event)'>
-    <h3>Register</h3>
-    <a routerLink='/login'>Already have an account?</a>
-    <button mat-raised-button color="primary" type='submit'>Register</button>
-    <div class="error" *ngIf='error'>{{error}}</div>
-  </app-auth-form>
-</div>
+<mat-card class="container">
+  <form fxLayout="column" fxLayoutAlign="center center" [formGroup]='registerForm' (ngSubmit)='onSubmit(registerForm)'>
+    <mat-card-header>
+      <mat-card-title>
+        <h3>Register</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+      <mat-form-field>
+        <input matInput placeholder="Nume" formControlName='surname'>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Prenume" formControlName='name'>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Adresa de e-mail" formControlName='email'>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type='password' placeholder="Parola" formControlName='password'>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName='branch' placeholder="Alege">
+          <mat-option *ngFor='let branch of branchList |keyvalue ' [value]='branch.key'>{{branch.value}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-error class="error" *ngIf='emailFormat'>Adresa de e-mail nu este validă.</mat-error>
+      <mat-error class="error" *ngIf='passwordInvalid'>Alege o parolă.</mat-error>
+      <div class="auth-form__toggle">
+        <a routerLink='/login'>Ai deja cont?</a>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="auth-form__action">
+        <button mat-raised-button color="primary" type='submit' [disabled]='registerForm.invalid'>Creează cont</button>
+      </div>
+    </mat-card-actions>
+  </form>
+</mat-card>
