@@ -1,22 +1,18 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Recipe, RecipeService } from 'prep/shared/services/recipe.service';
-
 @Component({
   selector: 'app-recipe',
   templateUrl: './recipe.component.html',
-  styleUrls: ['./recipe.component.css']
+  styleUrls: ['./recipe.component.scss']
 })
 export class RecipeComponent {
   constructor(
-    private recipeService: RecipeService,
     private router: Router
   ) { }
 
-  async addRecipe(event: Recipe) {
-    console.log('Reicpe', event);
-    // await this.recipeService.addRecipe(event);
+  addRecipe(event: any) {
+    console.log('Recipe', event);
     this.backToRecipes();
   }
 

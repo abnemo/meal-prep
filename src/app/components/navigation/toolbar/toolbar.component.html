@@ -1,5 +1,9 @@
 <mat-toolbar color="primary">
-  <!-- <div class='user-name' fxLayout="row" fxLayoutAlign="end center">{{user}}</div> -->
+  <div class='add-recipe' *ngIf='displayBtn' fxLayout="row" fxLayoutAlign="end center">
+    <a class='btn__add' routerLink="/../recipes/new">
+      <mat-icon>add_circle</mat-icon> New Recipe
+    </a>
+  </div>
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="onToggle()" *ngIf="isHandset$ | async">
     <mat-icon>menu</mat-icon>
   </button>

@@ -1,4 +1,8 @@
 <mat-nav-list>
+  <a mat-list-item routerLink="/" (click)='onClose()'>
+    <mat-icon>account_box</mat-icon>
+    <span class='nav-caption'>Household</span>
+  </a>
   <a mat-list-item routerLink="/recipes" (click)='onClose()'>
     <mat-icon>list</mat-icon>
     <span class='nav-caption'>RecipeList</span>

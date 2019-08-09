@@ -14,18 +14,21 @@ import { SharedModule } from 'prep/shared/shared.module';
 
 const routes: Routes = [
   {
-    path: '', canActivate: [AuthGuard], component: HomeLayoutComponent,
+    path: '',
+    canActivate: [AuthGuard], 
+    component: HomeLayoutComponent,
     children: [
+      // {
+      //   path: '',
+      //   canActivate: [AuthGuard], 
+      //   redirectTo: 'recipes', 
+      //   pathMatch: 'full',
+      // },
       {
         path: '',
         canActivate: [AuthGuard],
-        loadChildren: './dashboard/dashboard.module#DashboardModule'
+        loadChildren: './household/household.module#HouseholdModule'
       },
-      // {
-      //   path: 'recipe',
-      //   canActivate: [AuthGuard],
-      //   loadChildren: './recipe/recipe.module#RecipeModule'
-      // },
       {
         path: 'recipes',
         canActivate: [AuthGuard],
@@ -55,5 +58,4 @@ const routes: Routes = [
   imports: [MaterialModule, RouterModule.forRoot(routes), SharedModule.forRoot()],
   exports: [RouterModule]
 })
-export class PrepModule {
-}
+export class PrepModule {}

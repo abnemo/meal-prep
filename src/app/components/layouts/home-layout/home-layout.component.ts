@@ -6,14 +6,13 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'home-layout',
   templateUrl: 'home-layout.component.html',
-  styleUrls: ['home-layout.component.scss']
+  styleUrls: ['home-layout.component.scss'],
 })
 
 export class HomeLayoutComponent {
 
   constructor(
-    private breakpointObserver: BreakpointObserver
-    ) { }
+    private breakpointObserver: BreakpointObserver) { }
 
   isHandset$: Observable<boolean> =
     this.breakpointObserver.observe(Breakpoints.Handset)

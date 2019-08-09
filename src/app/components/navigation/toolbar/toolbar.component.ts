@@ -1,8 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { AuthService } from 'auth/shared/services/auth/auth.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-nav-toolbar',
@@ -17,14 +17,24 @@ export class ToolbarComponent {
 
   @Output() sidenavToggle = new EventEmitter<void>();
 
-  user: any;
+  displayBtn = false;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private authService: AuthService) { }
+    private router: Router) { }
 
   ngOnInit() {
-    this.user = this.authService.payload().email;
+    this.router.events.pipe(
+      filter((event: any) => event instanceof NavigationEnd)
+    )
+      .subscribe(event => {
+        console.log(event.url);
+        if (event.url !== '/recipes') {
+          this.displayBtn = false;
+        } else {
+          this.displayBtn = true;
+        }
+      });
   }
 
   onToggle() {

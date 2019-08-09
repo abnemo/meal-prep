@@ -1,6 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
-import { Recipe } from 'prep/shared/services/recipe.service';
 
 @Component({
   selector: 'recipe-form',
@@ -14,12 +13,10 @@ export class RecipeFormComponent {
     {
       recipeTitle: ['', Validators.required],
       ingredients: this.fb.array([this.initIngredients()]),
-      instructions: ['', Validators.required]
+      instructions: ['', Validators.required],
+      link: ['']
     }
   );
-
-  @Output()
-  create = new EventEmitter<Recipe>();
 
   constructor(private fb: FormBuilder) { }
 
@@ -27,7 +24,7 @@ export class RecipeFormComponent {
     return this.fb.group({
       ingredientName: ['', Validators.required],
       quantity: ['', Validators.required],
-      quantType: [''],
+      type: [''],
     });
   }
 
@@ -54,6 +51,7 @@ export class RecipeFormComponent {
   }
 
   onSubmit(form: any) {
-    this.create.emit(form);
-  }
+    console.log('recipe form', form)
+
+  } 
 }

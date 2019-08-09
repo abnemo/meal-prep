@@ -16,28 +16,15 @@ export class RegisterComponent {
   branchList: any;
 
   registerForm = this.fb.group({
-    surname: ['', Validators.required],
-    name: ['', Validators.required],
     email: ['', Validators.email],
     password: ['', Validators.required],
-    branch: ['', Validators.required]
   });
 
   constructor(
     private authService: AuthService, private router: Router,
     public authHttp: HttpClient, private fb: FormBuilder) { }
 
-  ngOnInit() {
-    this.authHttp.get(`${environment.API}/v1/branch`).subscribe(val => {
-      this.branchList = val;
-      for (const key of Object.keys(this.branchList)) {
-        const hostList = window.location.hostname.split('.');
-        if (hostList[0] === key.toLowerCase()) {
-          this.registerForm.patchValue({ branch: key });
-        }
-      }
-    });
-  }
+  ngOnInit() {}
 
   onSubmit(form: FormGroup) {
     this.authService.register(form.value)
