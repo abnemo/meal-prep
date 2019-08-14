@@ -1,3 +1,8 @@
+<div class="recipe__title" fxLayoutAlign="center center">
+  <h3>
+    <span>Create Recipe</span>
+  </h3>
+</div>
 <div class="form-card">
   <form [formGroup]='recipeForm' (ngSubmit)='onSubmit(recipeForm.value)'>
     <mat-card-content class="form" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
@@ -10,11 +15,12 @@
         <h3>Ingredients</h3>
         <mat-icon (click)="addIngredient()">add_circle_outline</mat-icon>
       </div>
+
       <div formArrayName='ingredients' class='mat-form-field-container' fxLayout="column" fxLayoutAlign="start center">
         <div *ngFor='let ingredient of recipeForm.controls.ingredients.controls; let i=index'>
           <div [formGroupName]='i' fxLayoutGap="10px">
             <mat-form-field class="form-input-ingred">
-              <input matInput placeholder="Ingredient" formControlName='ingredientName'>
+              <input matInput placeholder="Ingredient" formControlName='name'>
             </mat-form-field>
             <mat-form-field class="form-input-quant">
               <input matInput placeholder="Nr" formControlName='quantity'>
@@ -26,9 +32,9 @@
             </mat-form-field>
             <mat-icon *ngIf='i > 0' (click)="deleteIngredient(i)">remove_circle_outline</mat-icon>
           </div>
-
         </div>
       </div>
+      
       <div class='mat-form-field-container' fxLayoutAlign="start center">
         <h3>Instructions</h3>
       </div>

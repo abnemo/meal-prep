@@ -14,7 +14,7 @@ import { RecipeFormComponent } from 'prep/recipes/components/recipe-form/recipe-
 
 export const ROUTES: Routes = [
   { path: '', component: RecipeListComponent },
-  { path: 'new', component: RecipeComponent },
+  { path: 'new', component: RecipeFormComponent },
   { path: ':id', component: RecipeComponent }
 ];
 

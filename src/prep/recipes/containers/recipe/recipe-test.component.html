@@ -1,0 +1,108 @@
+<div class="form-card" *ngIf='display'>
+    <div>
+        <mat-card-content class="form" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+            <div class="mat-form-field-container-test" fxLayoutAlign="start center">
+                <div class='mat-form-field'>
+                    <h3>{{testRecipe.title}}</h3>
+                </div>
+            </div>
+            <div class='mat-form-field-container-test' fxLayoutAlign="start center" fxLayoutGap="10px">
+                <h3>Ingredients</h3>
+                <mat-icon (click)="addIngredient()">add_circle_outline</mat-icon>
+            </div>
+
+            <div class='mat-form-field-container-test' fxLayout="column"
+                fxLayoutAlign="start">
+                <div *ngFor='let ingredient of testRecipe.ingredients'>
+                    <div fxLayoutGap="10px" fxLayout="row">
+                        <div class="ingred">
+                            <span>{{ingredient.name}}</span>
+                        </div>
+                        <div class="quant">
+                            <span>{{ingredient.quantity}}</span>
+                        </div>
+                        <div class="type">
+                            <span>{{ingredient.type}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class='mat-form-field-container-test' fxLayoutAlign="start center">
+                <h3>Instructions</h3>
+            </div>
+            <div class='mat-form-field-container-test' fxLayoutAlign="start center">
+                <div class='mat-form-field'>
+                    <span>{{testRecipe.instructions}}</span>
+                </div>
+            </div>
+            <div class='mat-form-field-container-test' fxLayoutAlign="start center">
+                <div class='mat-form-field'>
+                    <span>{{testRecipe.links}}</span>
+                </div>
+            </div>
+
+            <button mat-raised-button color="primary" type="button" color="accent" (click)='editable()'>Edit</button>
+        </mat-card-content>
+    </div>
+</div>
+
+<div class="form-card" *ngIf='!display'>
+    <form [formGroup]='recipeForm' (ngSubmit)='onSubmit(recipeForm.value)'>
+        <mat-card-content class="form" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+            <div class="mat-form-field-container" fxLayoutAlign="start center">
+                <mat-form-field>
+                    <input matInput placeholder="Recipe title" formControlName='recipeTitle'>
+                </mat-form-field>
+            </div>
+            <div class='mat-form-field-container' fxLayoutAlign="start center" fxLayoutGap="10px">
+                <h3>Ingredients</h3>
+                <mat-icon (click)="addIngredient()">add_circle_outline</mat-icon>
+            </div>
+
+            <div formArrayName='ingredients' class='mat-form-field-container' fxLayout="column"
+                fxLayoutAlign="start center">
+                <div *ngFor='let ingredient of recipeForm.controls.ingredients.controls; let i=index'>
+                    <div [formGroupName]='i' fxLayoutGap="10px">
+                        <mat-form-field class="form-input-ingred">
+                            <input matInput placeholder="Ingredient" formControlName='name'>
+                        </mat-form-field>
+                        <mat-form-field class="form-input-quant">
+                            <input matInput placeholder="Nr" formControlName='quantity'>
+                        </mat-form-field>
+                        <mat-form-field class="form-input-type">
+                            <mat-select formControlName='type' placeholder="Type">
+                                <mat-option *ngFor='let quantType of quantityTypeArray' [value]='quantType'>
+                                    {{quantType}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-icon *ngIf='i > 0' (click)="deleteIngredient(i)">remove_circle_outline</mat-icon>
+                    </div>
+                </div>
+            </div>
+
+            <div class='mat-form-field-container' fxLayoutAlign="start center">
+                <h3>Instructions</h3>
+            </div>
+            <div class='mat-form-field-container' fxLayoutAlign="start center">
+                <mat-form-field>
+                    <textarea matInput placeholder="How to prepare" formControlName='instructions'
+                        cdkTextareaAutosize></textarea>
+                </mat-form-field>
+            </div>
+            <div class='mat-form-field-container' fxLayoutAlign="start center">
+                <mat-form-field>
+                    <input matInput placeholder="Link" formControlName='link'>
+                </mat-form-field>
+            </div>
+
+            <mat-card-actions fxLayoutGap="10px">
+                <button mat-raised-button color="primary" type="submit" [disabled]="recipeForm.invalid"
+                    color="primary">Submit</button>
+                <button mat-raised-button color="warn" [routerLink]='["../"]'>Cancel</button>
+            </mat-card-actions>
+            <mat-error class="error" *ngIf='requiredTitle'>Recipe name is required</mat-error>
+
+        </mat-card-content>
+    </form>
+</div>

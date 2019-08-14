@@ -3,16 +3,15 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { RecipeService } from 'prep/shared/services/recipe.service';
+import { IngredientDialogComponent } from './ingredient-dialog/ingredient-dialog.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [IngredientDialogComponent],
   imports: [
     CommonModule,
     RouterModule,
   ],
-  exports: [],
-  providers: [],
-  bootstrap: []
+  entryComponents: [IngredientDialogComponent]
 })
 
 export class SharedModule {

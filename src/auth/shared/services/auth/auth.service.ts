@@ -22,13 +22,13 @@ export class AuthService {
     private jwtHelper: JwtHelperService) { }
 
   login(login: any): Observable<boolean> {
-    return this.http.post(`${environment.API}/v1/account/login`, login)
+    return this.http.post(`${environment.API}/account/login`, login)
       .pipe(map(this.handleToken), catchError(this.handleError));
   }
 
   register(registration: any): Observable<boolean> {
     return this.http
-      .post(`${environment.API}/v1/account/register`, registration)
+      .post(`${environment.API}/account/register`, registration)
       .pipe(map(this.handleToken), catchError(this.handleError));
   }
 
@@ -41,7 +41,7 @@ export class AuthService {
   updateRole(): void {
     this.token = localStorage.getItem('token');
     if (this.token) {
-      this.http.get(`${environment.API}/v1/account/update`)
+      this.http.get(`${environment.API}/account/update`)
         .subscribe((res: any) => {
           if (res.token) this.handleToken(res);
         });

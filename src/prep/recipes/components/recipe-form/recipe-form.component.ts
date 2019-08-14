@@ -18,11 +18,13 @@ export class RecipeFormComponent {
     }
   );
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+    this.recipeForm.disable()
+   }
 
   initIngredients() {
     return this.fb.group({
-      ingredientName: ['', Validators.required],
+      name: ['', Validators.required],
       quantity: ['', Validators.required],
       type: [''],
     });
