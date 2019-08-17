@@ -1,6 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
-
+import { environment } from 'environments/environment'
+import { HttpClient } from '@angular/common/http'
+import { Router } from '@angular/router'
 @Component({
   selector: 'recipe-form',
   templateUrl: 'recipe-form.component.html',
@@ -11,22 +13,24 @@ export class RecipeFormComponent {
   quantityTypeArray = ['grams', 'kg', 'ml', 'litre', 'packs', 'cans', 'pieces'];
   recipeForm = this.fb.group(
     {
-      recipeTitle: ['', Validators.required],
+      title: ['', Validators.required],
       ingredients: this.fb.array([this.initIngredients()]),
       instructions: ['', Validators.required],
       link: ['']
     }
   );
 
-  constructor(private fb: FormBuilder) {
-    this.recipeForm.disable()
-   }
+  constructor(
+    private fb: FormBuilder,
+    private authHttp: HttpClient,
+    private router: Router
+    ) {}
 
   initIngredients() {
     return this.fb.group({
       name: ['', Validators.required],
       quantity: ['', Validators.required],
-      type: [''],
+      measurement: [''],
     });
   }
 
@@ -36,8 +40,8 @@ export class RecipeFormComponent {
 
   get requiredTitle() {
     return (
-      this.recipeForm.get('recipeTitle')!.hasError('required') &&
-      this.recipeForm.get('recipeTitle')!.touched
+      this.recipeForm.get('title')!.hasError('required') &&
+      this.recipeForm.get('title')!.touched
     );
   }
 
@@ -54,6 +58,10 @@ export class RecipeFormComponent {
 
   onSubmit(form: any) {
     console.log('recipe form', form)
-
+    this.authHttp.post(`${environment.API}/recipes`, form)
+    .subscribe((res) => {
+      console.log('res', res)
+      this.router.navigate([`/recipes/${res.Data.id}`])
+      })
   } 
 }

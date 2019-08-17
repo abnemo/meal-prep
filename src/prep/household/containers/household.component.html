@@ -1,3 +1,15 @@
-<p>household works!</p>
+<h2 fxLayoutAlign="center center">{{result?.name}}</h2>
 
-<h2>Welcome, {{ user }} !</h2>
+<div class="user-card-container">
+    <div class='user-card' fxLayout="column" fxLayoutAlign="center center" *ngFor='let user of result?.users'>
+        <mat-card>
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div>{{user.email}}</div>
+                    <div><button mat-raised-button color='primary' (click)='removeUser(user.id)'>Kick out</button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

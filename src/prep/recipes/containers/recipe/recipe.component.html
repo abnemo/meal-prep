@@ -3,7 +3,7 @@
     <mat-card-content class="form" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
       <div class="mat-form-field-container" fxLayoutAlign="start center">
         <mat-form-field>
-          <input matInput placeholder="Recipe title" formControlName='recipeTitle'>
+          <input matInput placeholder="Recipe title" formControlName='title'>
         </mat-form-field>
       </div>
       <div class='mat-form-field-container' fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -15,13 +15,13 @@
         <div *ngFor='let ingredient of recipeForm.controls.ingredients.controls; let i=index'>
           <div [formGroupName]='i' fxLayoutGap="10px">
             <mat-form-field class="form-input-ingred">
-              <input matInput placeholder="Ingredient" formControlName='ingredientName'>
+              <input matInput placeholder="Ingredient" formControlName='name'>
             </mat-form-field>
             <mat-form-field class="form-input-quant">
               <input matInput placeholder="Nr" formControlName='quantity'>
             </mat-form-field>
             <mat-form-field class="form-input-type">
-              <mat-select formControlName='type' placeholder="Type">
+              <mat-select placeholder="Type" formControlName='measurement'>
                 <mat-option *ngFor='let quantType of quantityTypeArray' [value]='quantType'>{{quantType}}</mat-option>
               </mat-select>
             </mat-form-field>

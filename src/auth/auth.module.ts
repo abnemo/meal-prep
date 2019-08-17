@@ -24,7 +24,7 @@ export function jwtTokenGetter() {
       config: {
         tokenGetter: jwtTokenGetter,
         whitelistedDomains:
-          ['localhost:8080', 'plus.experiments.explabs.io']
+          ['localhost:9100', 'plus.experiments.explabs.io']
       }
     })
   ],

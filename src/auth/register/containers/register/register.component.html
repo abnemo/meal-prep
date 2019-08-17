@@ -12,6 +12,9 @@
       <mat-form-field>
         <input matInput type='password' placeholder="Parola" formControlName='password'>
       </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Household" formControlName='householdName'>
+      </mat-form-field>
 
       <mat-error class="error" *ngIf='emailFormat'>Adresa de e-mail nu este validă.</mat-error>
       <mat-error class="error" *ngIf='passwordInvalid'>Alege o parolă.</mat-error>

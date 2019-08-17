@@ -1,9 +1,27 @@
-.recipe-card {
-  max-width: 400px;
-  margin: 20px;
+@import "~assets/styles/variables";
+.recipe-list {
+  max-width: 900px;
+  margin: 0 auto;
+  .recipe-card {
+    width: 150px;
+    margin: 20px;
+  }
 }
 
 a {
   text-decoration: none;
   color: white;
+
+
+@media screen and (min-width: 1000px) {
+    .recipe-list {
+        min-width: $form-max-width;
+    } 
+}
+
+@media screen and (max-width: 1000px) {
+    .recipe-list {
+        min-width: 330px;
+    } 
+}
 }

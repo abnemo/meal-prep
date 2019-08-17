@@ -8,7 +8,7 @@
     <mat-card-content class="form" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
       <div class="mat-form-field-container" fxLayoutAlign="start center">
         <mat-form-field>
-          <input matInput placeholder="Recipe title" formControlName='recipeTitle'>
+          <input matInput placeholder="Recipe title" formControlName='title'>
         </mat-form-field>
       </div>
       <div class='mat-form-field-container' fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -26,7 +26,7 @@
               <input matInput placeholder="Nr" formControlName='quantity'>
             </mat-form-field>
             <mat-form-field class="form-input-type">
-              <mat-select formControlName='type' placeholder="Type">
+              <mat-select formControlName='measurement' placeholder="Type">
                 <mat-option *ngFor='let quantType of quantityTypeArray' [value]='quantType'>{{quantType}}</mat-option>
               </mat-select>
             </mat-form-field>

@@ -1,21 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'auth/shared/services/auth/auth.service'
-
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'environments/environment';
 @Component({
   selector: 'app-household',
   templateUrl: './household.component.html',
   styleUrls: ['./household.component.scss']
 })
 export class HouseholdComponent implements OnInit {
+  result: any;
 
   constructor(
-    private authService: AuthService
+    private authHttp: HttpClient
   ) { }
 
-  user: any;
-
   ngOnInit() {
-    this.user = this.authService.payload().email
+    this.authHttp.get(`${ environment.API }/household`)
+    .subscribe((res) => {
+      this.result = res
+      })
+  }
+
+  removeUser(id: string) {
+    console.log('Stop trying to remove yourself! :D')
   }
 
 }
