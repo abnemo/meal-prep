@@ -22,7 +22,7 @@ export class RecipeComponent {
       title: ['', Validators.required],
       ingredients: this.fb.array([]),
       instructions: ['', Validators.required],
-      link: ['']
+      links: ['']
     }
   );
 
@@ -39,17 +39,17 @@ export class RecipeComponent {
        this.authHttp.get(`${ environment.API }/recipes/${params.id}`)
        .subscribe((res : any) =>{
         this.testRecipe = res.Data
-        console.log('test', this.testRecipe)
+        console.log('testRecipe', this.testRecipe)
         this.recipeForm.patchValue({
           title: this.testRecipe.title,
           instructions: this.testRecipe.instructions,
-          link: this.testRecipe.links 
+          links: this.testRecipe.links 
         })
-        for (let ingredient of this.testRecipe.ingredients) {
+        for (let elem of this.testRecipe.ingredients) {
           this.ingredients.push(this.fb.group({
-            name: ingredient.name,
-            quantity: ingredient.quantity,
-            measurement: ingredient.measurement
+            name: elem.ingredient.name,
+            quantity: elem.quantity,
+            measurement: elem.ingredient.measurement
           }))
         }
       })
@@ -83,11 +83,16 @@ export class RecipeComponent {
   }
 
   onEdit(form: Recipe) {
-    console.log('form', form)
     const body = {
-      form: form,
+      form: {
+        title: form.title,
+        ingredients: form.ingredients,
+        instructions: form.instructions,
+        links: [{url: form.links}]
+      },
       id: this.id
     }
+    console.log('body', body)
     this.authHttp.put(`${environment.API}/recipes/${this.id}`, body)
     .subscribe(res => console.log('res', res))
   }

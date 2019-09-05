@@ -1,13 +1,6 @@
-<div class='search' fxLayoutAlign="center center">
-  <mat-form-field appearance="standard">
-    <mat-label>Ingredient</mat-label>
-    <input matInput>
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-</div>
-
+<app-search-component (searchFilter)='getSearch($event)'></app-search-component>
 <div class="ingredient-card-container">
-  <div class='ingredient-card' fxLayout="column" fxLayoutAlign="center center" *ngFor='let ingredient of pantry'>
+  <div class='ingredient-card' fxLayout="column" fxLayoutAlign="center center" *ngFor='let ingredient of pantry | filter: searchText'>
     <mat-card>
       <mat-card-content>
         <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -30,4 +23,4 @@
     </mat-card>
   </div>
 </div>
-
+<app-float-button [data]='data'></app-float-button>

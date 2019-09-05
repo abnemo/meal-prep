@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeLayoutComponent } from 'app/components/layouts/home-layout/home-layout.component';
 import { SidenavComponent } from 'app/components/navigation/sidenav/sidenav.component';
 import { ToolbarComponent } from 'app/components/navigation/toolbar/toolbar.component';
-
 // guards
 import { AuthGuard } from 'auth/shared/guards/auth.guard';
 // shared Modules
@@ -18,12 +17,6 @@ const routes: Routes = [
     canActivate: [AuthGuard], 
     component: HomeLayoutComponent,
     children: [
-      // {
-      //   path: '',
-      //   canActivate: [AuthGuard], 
-      //   redirectTo: 'recipes', 
-      //   pathMatch: 'full',
-      // },
       {
         path: '',
         canActivate: [AuthGuard],

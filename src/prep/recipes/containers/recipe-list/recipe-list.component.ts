@@ -11,6 +11,10 @@ import { Router } from '@angular/router';
 
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[];
+  data = {
+    location: 'recipes',
+    path: ['../recipes/new']
+  }
 
   constructor(
     private authHttp: HttpClient,
@@ -20,7 +24,7 @@ export class RecipeListComponent implements OnInit {
   ngOnInit() {
     this.authHttp.get(`${environment.API }/recipes`)
     .subscribe((res: any) => {
-      this.recipes = res['Data']
+      this.recipes = res.data
       })
   } 
 

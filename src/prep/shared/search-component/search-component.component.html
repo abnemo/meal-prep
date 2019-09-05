@@ -1,0 +1,7 @@
+<div class='search' fxLayoutAlign="center center">
+    <mat-form-field appearance="standard">
+        <mat-label>Ingredient</mat-label>
+        <input matInput [(ngModel)]="searchTerm" (ngModelChange)="search()">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+</div>

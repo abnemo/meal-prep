@@ -1,8 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 import { environment } from 'environments/environment'
 import { HttpClient } from '@angular/common/http'
-import { Router } from '@angular/router'
 @Component({
   selector: 'recipe-form',
   templateUrl: 'recipe-form.component.html',
@@ -23,7 +22,6 @@ export class RecipeFormComponent {
   constructor(
     private fb: FormBuilder,
     private authHttp: HttpClient,
-    private router: Router
     ) {}
 
   initIngredients() {
@@ -61,7 +59,7 @@ export class RecipeFormComponent {
     this.authHttp.post(`${environment.API}/recipes`, form)
     .subscribe((res) => {
       console.log('res', res)
-      this.router.navigate([`/recipes/${res.Data.id}`])
+      // this.router.navigate([`/recipes/${res.data.id}`])
       })
   } 
 }

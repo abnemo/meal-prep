@@ -12,16 +12,16 @@
 
             <div class='mat-form-field-container-test' fxLayout="column"
                 fxLayoutAlign="start">
-                <div *ngFor='let ingredient of testRecipe.ingredients'>
+                <div *ngFor='let elem of testRecipe.ingredients'>
                     <div fxLayoutGap="10px" fxLayout="row">
                         <div class="ingred">
-                            <span>{{ingredient?.name}}</span>
+                            <span>{{elem?.ingredient.name}}</span>
                         </div>
                         <div class="quant">
-                            <span>{{ingredient?.quantity}}</span>
+                            <span>{{elem?.quantity}}</span>
                         </div>
                         <div class="type">
-                            <span>{{ingredient?.measurement}}</span>
+                            <span>{{elem?.ingredient.measurement}}</span>
                         </div>
                     </div>
                 </div>
@@ -36,8 +36,8 @@
                 </div>
             </div>
             <div class='mat-form-field-container-test' fxLayoutAlign="start center">
-                <div class='mat-form-field'>
-                    <span>{{testRecipe?.links}}</span>
+                <div class='mat-form-field' *ngFor='let link of testRecipe.links'>
+                    <a href='{{link?.url}}' target="_blank" >{{link?.url}}</a>
                 </div>
             </div>
 
@@ -91,7 +91,7 @@
             </div>
             <div class='mat-form-field-container' fxLayoutAlign="start center">
                 <mat-form-field>
-                    <input matInput placeholder="Link" formControlName='link'>
+                    <input matInput placeholder="Link" formControlName='links'>
                 </mat-form-field>
             </div>
 
