@@ -1,0 +1,7 @@
+<div class='recipeList'>
+    <div class='recipes__title' fxLayoutAlign='center center'>
+        <h2>Your recipes</h2>
+    </div>
+    <mp-recipe-list [recipes]='recipes' (remove)='removeRecipe($event)'></mp-recipe-list>
+</div>
+<mp-float-button [data]='data'></mp-float-button>

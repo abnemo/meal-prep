@@ -1,9 +1,0 @@
-{
-  "name": "mealPrep",
-  "short_name": "mealPrep",
-  "theme_color": "#F9AF00",
-  "background_color": "#FFDD8E",
-  "display": "standalone",
-  "scope": "/",
-  "start_url": "/"
-}
