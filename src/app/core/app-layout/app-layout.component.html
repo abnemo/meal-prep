@@ -1,0 +1,9 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+        <mp-sidenav-content (closeSidenav)='closeIfHandset()'></mp-sidenav-content>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mp-toolbar [isHandset$]="isHandset$" (toggleSidenav)="sidenav.toggle()"></mp-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

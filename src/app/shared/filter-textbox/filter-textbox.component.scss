@@ -1,0 +1,8 @@
+@import "src/assets/styles/variables";
+
+.search {
+    padding-left: 20px;
+    mat-form-field {
+        max-width: $form-max-width;
+    }
+}
