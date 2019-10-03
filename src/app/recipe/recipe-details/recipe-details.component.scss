@@ -1,0 +1,46 @@
+.mat-form-field-container-test {
+    padding: 20px 30px 0px 30px;
+    width: 100%;
+    max-width: 600px;
+    .test {
+      width: 100%
+    }
+    .ingred {
+      min-width: 150px;
+    }
+    .quant {
+      min-width: 60px;
+    }
+    .type {
+      min-width: 90px;
+    }
+    font-size: 16px;
+}
+
+.mat-form-field-container {
+    padding: 20px 30px 0px 30px;
+    width: 100%;
+    max-width: 600px;
+    mat-form-field {
+        width: 100%;
+    }
+    mat-form-field {
+        width: 100%;
+    }
+    .form-input-ingred {
+      min-width: 60px;
+      width: calc(50% - 18px);
+    }
+    .form-input-quant {
+      min-width: 20px;
+      width: calc(20% - 18px);
+    }
+    .form-input-type {
+      min-width: 40px;
+      width: calc(30% - 18px);
+    }
+    .mat-icon {
+      width: 24px;
+    }
+    font-size: 16px;
+}

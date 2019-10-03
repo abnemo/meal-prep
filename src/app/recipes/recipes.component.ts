@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { RecipesService } from './recipes.service';
 
 @Component({
-  selector: 'app-recipes',
+  selector: 'mp-recipes',
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.scss']
 })
@@ -12,7 +12,7 @@ export class RecipesComponent implements OnInit {
   recipes: Recipe[]
   data = {
     location: 'recipes',
-    path: ['../recipes/new']
+    path: ['/recipes/0/edit']
   }
 
   constructor(
