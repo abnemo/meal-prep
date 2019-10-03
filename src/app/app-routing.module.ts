@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, Router } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { AppLayoutComponent } from './core/app-layout/app-layout.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
   {
     path: '',
     component: AppLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -28,12 +30,19 @@ const routes: Routes = [
         loadChildren: () => import('src/app/recipes/recipes.module').then(m => m.RecipesModule)
       },
       {
+        path: 'recipes/:id',
+        loadChildren: () => import('src/app/recipe/recipe.module').then(m => m.RecipeModule)
+      },
+      {
         path: 'shoppinglist',
         loadChildren: () => import('src/app/shopping-list/shopping-list.module').then(m => m.ShoppingListModule)
       },
       {
         path: 'weekprep',
         loadChildren: () => import('src/app/weekprep/weekprep.module').then(m => m.WeekPrepModule)
+      },
+      {
+        path: '**', pathMatch: 'full', redirectTo: ''
       }
     ]
   },
