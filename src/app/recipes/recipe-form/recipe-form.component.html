@@ -17,23 +17,18 @@
             </div>
 
             <div formArrayName='ingredients' class='mat-form-field-container' fxLayout="column"
-                fxLayoutAlign="start center">
-                <div *ngFor='let ingredient of recipeForm.controls.ingredients.controls; let i=index'>
-                    <div [formGroupName]='i' fxLayoutGap="10px">
-                        <mat-form-field class="form-input-ingred">
-                            <input matInput placeholder="Ingredient" formControlName='name'>
-                        </mat-form-field>
-                        <mat-form-field class="form-input-quant">
-                            <input matInput placeholder="Nr" formControlName='quantity'>
-                        </mat-form-field>
-                        <mat-form-field class="form-input-type">
-                            <mat-select formControlName='measurement' placeholder="Type">
-                                <mat-option *ngFor='let quantType of quantityTypeArray' [value]='quantType'>
-                                    {{quantType}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-icon *ngIf='i > 0' (click)="deleteIngredient(i)">remove_circle_outline</mat-icon>
-                    </div>
+                fxLayoutAlign="start center" *ngFor='let ingredient of ingredients.controls; let i=index'>
+                <div [formGroupName]='i' fxLayoutGap="10px">
+                    <mat-form-field class="form-input-ingred">
+                        <input matInput placeholder="Ingredient" formControlName='name'>
+                    </mat-form-field>
+                    <mat-form-field class="form-input-quant">
+                        <input matInput placeholder="Nr" formControlName='quantity'>
+                    </mat-form-field>
+                    <mat-form-field class="form-input-type">
+                        <input matInput placeholder="type" formControlName='measurement'>
+                    </mat-form-field>
+                    <mat-icon (click)="deleteIngredient(i)">remove_circle_outline</mat-icon>
                 </div>
             </div>
 
@@ -55,7 +50,7 @@
             <mat-card-actions fxLayoutGap="10px">
                 <button mat-raised-button color="primary" type="submit" [disabled]="recipeForm.invalid"
                     color="primary">Submit</button>
-                <button mat-raised-button color="warn" [routerLink]='["../"]'>Cancel</button>
+                <button mat-raised-button color="warn" type="button" [routerLink]='["../"]'>Cancel</button>
             </mat-card-actions>
             <mat-error class="error" *ngIf='requiredTitle'>Recipe name is required</mat-error>
 
