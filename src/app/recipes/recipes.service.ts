@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment'
-import { catchError, map } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { throwError, Observable, of } from 'rxjs';
+import { Recipe } from 'src/models/recipe.model';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class RecipesService {
 
   constructor(
-    private authHttp: HttpClient
+    private authHttp: HttpClient,
+    private router: Router
   ) { }
 
   getRecipeList() {
@@ -18,12 +21,48 @@ export class RecipesService {
     )
   }
 
+  getRecipe(id: string): Observable<Recipe> {
+    if (id === '0') return of(this.initializeRecipe())
+
+    return this.authHttp.get<Recipe>(`${environment.API}/recipes/${id}`)
+      .pipe(
+        map((response: any) => response.data),
+        catchError(this.handleError)
+      )
+  }
+
+  initializeRecipe(): Recipe {
+    return {
+      id: '0',
+      dateCreated: null,
+      title: null,
+      ingredients: [],
+      instructions: null,
+      links: null
+    }
+  }
+
+  addRecipe(data: Recipe) {
+    return this.authHttp.post(`${environment.API}/recipes`, data)
+  }
+
+  updateRecipe(recipe: Recipe): Observable<Recipe> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
+    return this.authHttp.put<Recipe>(`${environment.API}/recipes/${recipe.id}`, recipe, { headers: headers })
+      .pipe(
+        tap(() => console.log('updateRecipe' + recipe.id)),
+        map(() => recipe),
+        catchError(this.handleError)
+      )
+  }
+
   removeRecipe(id: string) {
     const options = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       id: id
     };
-    this.authHttp.post((`${environment.API}/recipes/delete/`), options)
+    this.authHttp.post((`${environment.API}/recipes/delete`), options)
+      .subscribe(res => console.log('res', res))
   }
 
   private handleError(error: Response | any) {
@@ -39,4 +78,3 @@ export class RecipesService {
     return throwError(errMsg);
   }
 }
-

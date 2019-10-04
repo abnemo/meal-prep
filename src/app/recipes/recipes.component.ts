@@ -28,8 +28,9 @@ export class RecipesComponent implements OnInit {
     this.router.navigate([`/recipes/${id}`])
   }
 
-  removeRecipe(event: string) {
-    this.recipeService.removeRecipe(event)
+  removeRecipe(id: string) {
+    this.recipes = this.recipes.filter(item => item.id !== id)
+    this.recipeService.removeRecipe(id)
   }
 
 }

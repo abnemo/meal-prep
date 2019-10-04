@@ -30,10 +30,6 @@ const routes: Routes = [
         loadChildren: () => import('src/app/recipes/recipes.module').then(m => m.RecipesModule)
       },
       {
-        path: 'recipes/:id',
-        loadChildren: () => import('src/app/recipe/recipe.module').then(m => m.RecipeModule)
-      },
-      {
         path: 'shoppinglist',
         loadChildren: () => import('src/app/shopping-list/shopping-list.module').then(m => m.ShoppingListModule)
       },

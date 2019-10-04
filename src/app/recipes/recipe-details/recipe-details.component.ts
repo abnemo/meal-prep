@@ -1,29 +1,29 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RecipeService } from './recipe.service';
 import { Recipe } from 'src/models/recipe.model';
-import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { mergeMap, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
+import { RecipesService } from '../recipes.service';
 
 @Component({
-  templateUrl: './recipe.component.html',
+  selector: 'mp-recipe-details',
+  templateUrl: './recipe-details.component.html',
+  styleUrls: ['./recipe-details.component.scss']
 })
-export class RecipeComponent implements OnInit, OnDestroy {
+export class RecipeDetailsComponent implements OnInit, OnDestroy {
   recipe: Recipe;
   private sub: Subscription
   constructor(
-    private recipeService: RecipeService,
+    private recipesService: RecipesService,
     private activeRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
     this.sub = this.activeRoute.params
       .pipe(
-        tap(params => console.log(params.id)),
-        mergeMap(params => this.recipeService.getRecipe(params.id))
+        mergeMap(params => this.recipesService.getRecipe(params.id))
       )
       .subscribe((val) => {
-        console.log('val', val)
         this.recipe = val
       })
   }
@@ -31,4 +31,5 @@ export class RecipeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe()
   }
+
 }
