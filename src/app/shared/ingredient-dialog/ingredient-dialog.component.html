@@ -1,19 +1,30 @@
+<div fxLayoutAlign="center center">
+    <h3>
+        <span>{{pageTitle}}</span>
+    </h3>
+</div>
 <div class="form-card">
     <form [formGroup]='ingredientForm' (ngSubmit)='onSubmit(ingredientForm.value)'>
         <mat-card-content class="form" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
             <div class="mat-form-field-container" fxLayoutAlign="start center">
                 <mat-form-field>
-                    <input matInput placeholder="Name" formControlName='name'>
+                    <input matInput placeholder="Name" formControlName='name' required>
+                    <mat-error *ngIf='ingredientForm.get("name").errors?.required'>Name is required.</mat-error>
                 </mat-form-field>
             </div>
             <div class='mat-form-field-container' fxLayoutAlign="start center">
                 <mat-form-field>
-                    <input matInput placeholder="quantity" formControlName='quantity'>
+                    <input matInput placeholder="quantity" formControlName='quantity' required>
+                    <mat-error *ngIf='ingredientForm.get("quantity").errors?.required'>Quantity is required.</mat-error>
+                    <mat-error *ngIf='ingredientForm.get("quantity").errors?.notInteger'>Quantity must be a number.
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class='mat-form-field-container' fxLayoutAlign="start center">
                 <mat-form-field>
-                    <input matInput placeholder="measurement" formControlName='measurement'>
+                    <input matInput placeholder="measurement" formControlName='measurement' required>
+                    <mat-error *ngIf='ingredientForm.get("measurement").errors?.required'>Measurement is required.
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class='mat-form-field-container' fxLayoutAlign="start center">
@@ -26,11 +37,15 @@
             <div class='mat-form-field-container' fxLayoutAlign="start center">
                 <mat-form-field>
                     <input matInput placeholder="price" formControlName='price'>
+                    <mat-error *ngIf='ingredientForm.get("price").errors?.notInteger'>Price must be a number.
+                    </mat-error>
                 </mat-form-field>
             </div>
             <mat-card-actions fxLayoutAlign="center center">
                 <button mat-raised-button color="primary" type="submit" [disabled]="ingredientForm.invalid"
                     color="primary">Submit</button>
+                <button mat-raised-button color="primary" type="button" color="warn" *ngIf='source === "edit"'
+                    (click)='delete()'>Delete</button>
             </mat-card-actions>
         </mat-card-content>
     </form>

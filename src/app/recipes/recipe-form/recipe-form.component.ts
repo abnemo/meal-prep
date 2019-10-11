@@ -1,11 +1,22 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Recipe } from 'src/models/recipe.model';
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, Validators, FormArray, FormGroup, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { mergeMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { RecipesService } from '../recipes.service';
+import { Recipe } from 'src/models/recipe.model';
 import { Ingredient } from 'src/models/ingredient.model';
+import { integerValidator } from '../../shared/validators/checkInteger.validator'
+
+enum Fields {
+  TITLE = 'title',
+  INGREDIENTS = 'ingredients',
+  INSTRUCTIONS = 'instructions',
+}
+
+type Errors = {
+  [key in Fields]: string;
+};
 
 @Component({
   selector: 'mp-recipe-form',
@@ -15,16 +26,25 @@ import { Ingredient } from 'src/models/ingredient.model';
 export class RecipeFormComponent implements OnInit {
   @Input() recipe: Recipe;
   pageTitle: string;
-  errorMessage: string;
-  private sub: Subscription
-  recipeForm = this.fb.group(
-    {
-      title: ['', Validators.required],
-      ingredients: this.fb.array([this.initIngredients()]),
-      instructions: ['', Validators.required],
-      links: ['']
+  recipeForm: FormGroup;
+  private sub: Subscription;
+  private validationMessages = {
+    title: {
+      required: 'Title is required.',
+    },
+    ingredients: {
+      required: 'Ingredient is required.',
+    },
+    instructions: {
+      required: 'Instructions are required.'
     }
-  );
+  };
+
+  error: Errors = {
+    title: '',
+    ingredients: '',
+    instructions: '',
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +54,21 @@ export class RecipeFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.recipeForm = this.fb.group(
+      {
+        title: ['', Validators.required],
+        ingredients: this.fb.array([this.initIngredients()]),
+        instructions: ['', Validators.required],
+        links: ['']
+      }, {
+      validators: (c: AbstractControl) => {
+        if (c.value.ingredients.length === 0) {
+          return { ingredients: true };
+        }
+        return null;
+      }
+    })
+
     this.sub = this.activeRoute.params
       .pipe(
         mergeMap(params => this.recipesService.getRecipe(params.id))
@@ -47,12 +82,26 @@ export class RecipeFormComponent implements OnInit {
           this.fillForm(val)
         }
       })
+
+    const titleControl = this.recipeForm.get('title');
+    titleControl.valueChanges.subscribe(() => this.notify(titleControl, Fields.TITLE));
+
+    const ingredientsControl = this.recipeForm.get('ingredients');
+    ingredientsControl.valueChanges.subscribe(() => {
+      this.notify(ingredientsControl, Fields.INGREDIENTS)
+    });
+
+    const instructionsControl = this.recipeForm.get('instructions');
+    instructionsControl.valueChanges.subscribe(() => this.notify(instructionsControl, Fields.INSTRUCTIONS));
+
+    this.recipeForm.get('ingredients').setValidators([Validators.required, Validators.minLength(1)]);
+    this.recipeForm.get('ingredients').updateValueAndValidity();
   }
 
   initIngredients() {
     return this.fb.group({
       name: ['', Validators.required],
-      quantity: ['', Validators.required],
+      quantity: [null, [Validators.required, integerValidator]],
       measurement: ['', Validators.required],
     });
   }
@@ -83,9 +132,9 @@ export class RecipeFormComponent implements OnInit {
     ingredients.forEach(elem => {
       formArray.push(
         this.fb.group({
-          name: elem.ingredient.name,
-          quantity: elem.ingredient.quantity,
-          measurement: elem.ingredient.measurement
+          name: elem.name,
+          quantity: elem.quantity,
+          measurement: elem.measurement
         })
       )
     });
@@ -93,31 +142,21 @@ export class RecipeFormComponent implements OnInit {
   }
 
   onSubmit(form: any) {
-    form.links = [{ url: form.links }]
     if (this.recipeForm.valid) {
       if (this.recipeForm.dirty) {
         const recipe = { ...this.recipe, ...form }
-        console.log('recipe', recipe)
         if (recipe.id === '0') {
-          console.log('creating new!')
           this.recipesService.addRecipe(recipe)
             .subscribe({
               next: () => this.onSaveComplete(),
-              error: err => this.errorMessage = err
             });
         } else {
-          console.log('updating recipe')
           this.recipesService.updateRecipe(recipe)
-            .subscribe({
-              next: () => this.onSaveComplete(),
-              error: err => this.errorMessage = err
-            });
+            .subscribe(() => this.onSaveComplete());
         }
       } else {
         this.onSaveComplete();
       }
-    } else {
-      this.errorMessage = 'Please correct the validation errors.';
     }
   }
 
@@ -125,6 +164,18 @@ export class RecipeFormComponent implements OnInit {
     // Reset the form to clear the flags
     this.recipeForm.reset();
     this.router.navigate(['/recipes']);
+  }
+
+  notify(c: AbstractControl, field: string): void {
+    this.error[field] = '';
+    if (c.errors && c.status === 'INVALID') {
+      this.error[field] = Object.keys(c.errors)
+        .map(key => this.validationMessages[field][key]);
+    }
+    if ((c.touched || c.dirty) && c.errors) {
+      this.error[field] = Object.keys(c.errors)
+        .map(key => this.validationMessages[field][key]);
+    }
   }
 
   ngOnDestroy(): void {

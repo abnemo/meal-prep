@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { speedDialFabAnimations } from './float-button.animations';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { IngredientDialogComponent } from '../ingredient-dialog/ingredient-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'mp-float-button',
@@ -12,11 +13,15 @@ import { IngredientDialogComponent } from '../ingredient-dialog/ingredient-dialo
 })
 export class FloatButtonComponent {
   @Input() data: any;
+  @Output() added = new EventEmitter<any>();
   buttons: any[] = [];
+  onComplete: Subscription
   fabTogglerState = 'inactive';
+
   constructor(
     private router: Router,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog
+  ) { }
 
   showItems() {
     this.fabTogglerState = 'active';
@@ -35,12 +40,18 @@ export class FloatButtonComponent {
       dialogConfig.height = '550px';
       dialogConfig.width = '400px';
       dialogConfig.data = ''
-      this.dialog.open(IngredientDialogComponent, dialogConfig);
-      this.dialog.afterAllClosed.subscribe((res) => {
+      const dialogRef = this.dialog.open(IngredientDialogComponent, dialogConfig);
+      dialogRef.afterClosed().subscribe(() => {
         this.fabTogglerState = 'inactive'
       })
+      this.onComplete = dialogRef.componentInstance.onComplete
+        .subscribe(data => this.added.emit(data))
     }
     this.fabTogglerState === 'active' ? this.hideItems() : this.showItems();
   }
+
+  // ngOnDestroy(): void {
+  //   this.onComplete.unsubscribe()
+  // }
 
 }

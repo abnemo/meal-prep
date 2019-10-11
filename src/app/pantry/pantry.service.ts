@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Ingredient } from 'src/models/ingredient.model';
 
 export interface PantryResponse {
@@ -11,7 +11,6 @@ export interface PantryResponse {
 
 @Injectable({ providedIn: 'root' })
 export class PantryService {
-  pantry: any;
 
   constructor(private authHttp: HttpClient) { }
 
@@ -20,6 +19,26 @@ export class PantryService {
       map(res => res.data),
       catchError(this.handleError)
     )
+  }
+
+  addIngredient(ingredient: Ingredient): Observable<Ingredient> {
+    return this.authHttp.post<Ingredient>(`${environment.API}/pantry`, ingredient)
+  }
+
+  updateIngredient(ingredient: Ingredient): Observable<Ingredient> {
+    return this.authHttp.put<Ingredient>(`${environment.API}/pantry/${ingredient.id}`, ingredient)
+      .pipe(
+        map(() => ingredient),
+        catchError(this.handleError)
+      )
+  }
+
+  removeIngredient(id: string) {
+    const options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      id: id
+    };
+    return this.authHttp.post((`${environment.API}/pantry/delete`), options)
   }
 
   private handleError(error: Response | any) {
