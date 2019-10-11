@@ -4,18 +4,16 @@ import { environment } from 'src/environments/environment'
 import { catchError, map, tap } from 'rxjs/operators';
 import { throwError, Observable, of } from 'rxjs';
 import { Recipe } from 'src/models/recipe.model';
-import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class RecipesService {
 
   constructor(
     private authHttp: HttpClient,
-    private router: Router
   ) { }
 
-  getRecipeList() {
-    return this.authHttp.get(`${environment.API}/recipes`).pipe(
+  getRecipeList(): Observable<Recipe[]> {
+    return this.authHttp.get<Recipe[]>(`${environment.API}/recipes`).pipe(
       map((res: any) => res.data),
       catchError(this.handleError)
     )
@@ -42,15 +40,13 @@ export class RecipesService {
     }
   }
 
-  addRecipe(data: Recipe) {
-    return this.authHttp.post(`${environment.API}/recipes`, data)
+  addRecipe(data: Recipe): Observable<Recipe> {
+    return this.authHttp.post<Recipe>(`${environment.API}/recipes`, data)
   }
 
   updateRecipe(recipe: Recipe): Observable<Recipe> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
-    return this.authHttp.put<Recipe>(`${environment.API}/recipes/${recipe.id}`, recipe, { headers: headers })
+    return this.authHttp.put<Recipe>(`${environment.API}/recipes/${recipe.id}`, recipe)
       .pipe(
-        tap(() => console.log('updateRecipe' + recipe.id)),
         map(() => recipe),
         catchError(this.handleError)
       )

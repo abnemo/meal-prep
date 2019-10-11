@@ -1,11 +1,8 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http'
-import { MAT_DIALOG_DATA } from '@angular/material';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Ingredient } from 'src/models/ingredient.model';
+import { integerValidator } from '../validators/checkInteger.validator';
 
 @Component({
   selector: 'app-ingredient-dialog',
@@ -13,52 +10,68 @@ import { Ingredient } from 'src/models/ingredient.model';
   styleUrls: ['./ingredient-dialog.component.scss']
 })
 export class IngredientDialogComponent implements OnInit {
-  isHandset!: boolean;
-  isHandset$: Observable<boolean> =
-    this.breakpointObserver.observe(Breakpoints.Handset)
-      .pipe(map(result => result.matches));
+  @Output() onDelete = new EventEmitter<any>();
+  @Output() onComplete = new EventEmitter<any>();
 
-  ingredientForm = this.fb.group(
-    {
-      name: ['', Validators.required],
-      quantity: ['', Validators.required],
-      measurement: ['', Validators.required],
-      expiration: [''],
-      price: ['']
-    }
-  );
+  isHandset!: boolean;
+  pageTitle: string;
+  source: string;
+  ingredientForm: FormGroup;
+
   constructor(
-    private breakpointObserver: BreakpointObserver,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private authHttp: HttpClient,
+    public dialogRef: MatDialogRef<IngredientDialogComponent>
   ) { }
 
   ngOnInit() {
-    this.isHandset$.subscribe(val => {
-      this.isHandset = val;
-    });
+    //initialize form
+    this.ingredientForm = this.fb.group(
+      {
+        name: ['', Validators.required],
+        quantity: [null, [Validators.required, integerValidator]],
+        measurement: ['', Validators.required],
+        expiration: [''],
+        price: [null, [integerValidator]]
+      }
+    );
+
+    //manage data
     if (this.data) {
-      console.log('data', this.data)
+      this.pageTitle = 'Edit ingredient'
+      this.source = 'edit'
+      this.fillIngredient(this.data)
+    } else {
+      this.pageTitle = 'Add new ingredient'
+    }
+  }
+
+  fillIngredient(data: Ingredient) {
+    this.ingredientForm.patchValue({
+      name: data.name,
+      quantity: data.quantity,
+      measurement: data.measurement,
+    })
+    if (data.expiration) {
       this.ingredientForm.patchValue({
-        name: this.data.name,
-        quantity: this.data.quantity,
-        measurement: this.data.measurement,
+        expiration: data.expiration
       })
-      if (this.data.expiration) {
-        this.ingredientForm.patchValue({
-          expiration: this.data.expiration
-        })
-      }
-      if (this.data.price) {
-        this.ingredientForm.patchValue({
-          price: this.data.price
-        })
-      }
+    }
+    if (data.price) {
+      this.ingredientForm.patchValue({
+        price: data.price
+      })
     }
   }
 
   onSubmit(form: Ingredient) {
-    console.log('form', form)
+    form.id = this.data.id
+    this.onComplete.emit(form)
+    this.dialogRef.close()
+  }
+
+  delete() {
+    this.onDelete.emit(this.data.id)
+    this.dialogRef.close();
   }
 }

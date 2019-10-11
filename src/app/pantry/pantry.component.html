@@ -13,7 +13,7 @@
                             <span>{{ingredient.quantity}}</span>
                         </div>
                         <div class="type">
-                            <span>{{ingredient.type}}</span>
+                            <span>{{ingredient.measurement}}</span>
                         </div>
                     </div>
                     <div>
@@ -24,4 +24,4 @@
         </mat-card>
     </div>
 </div>
-<mp-float-button [data]='data'></mp-float-button>
+<mp-float-button [data]='data' (added)='onAdd($event)'></mp-float-button>

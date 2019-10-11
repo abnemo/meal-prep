@@ -9,6 +9,7 @@
             <div class="mat-form-field-container" fxLayoutAlign="start center">
                 <mat-form-field>
                     <input matInput placeholder="Recipe title" formControlName='title'>
+                    <mat-error *ngIf='error.title'>{{error.title}}</mat-error>
                 </mat-form-field>
             </div>
             <div class='mat-form-field-container' fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -21,12 +22,20 @@
                 <div [formGroupName]='i' fxLayoutGap="10px">
                     <mat-form-field class="form-input-ingred">
                         <input matInput placeholder="Ingredient" formControlName='name'>
+                        <mat-error *ngIf='ingredient.get("name").errors?.required'>Required.
+                        </mat-error>
                     </mat-form-field>
                     <mat-form-field class="form-input-quant">
                         <input matInput placeholder="Nr" formControlName='quantity'>
+                        <mat-error *ngIf='ingredient.get("quantity").errors?.required'>Required.
+                        </mat-error>
+                        <mat-error *ngIf='ingredient.get("quantity").errors?.notInteger'>Must be a number
+                        </mat-error>
                     </mat-form-field>
                     <mat-form-field class="form-input-type">
                         <input matInput placeholder="type" formControlName='measurement'>
+                        <mat-error *ngIf='ingredient.get("measurement").errors?.required'>Required.
+                        </mat-error>
                     </mat-form-field>
                     <mat-icon (click)="deleteIngredient(i)">remove_circle_outline</mat-icon>
                 </div>
@@ -39,20 +48,22 @@
                 <mat-form-field>
                     <textarea matInput placeholder="How to prepare" formControlName='instructions'
                         cdkTextareaAutosize></textarea>
+                    <mat-error *ngIf='error.instructions'>{{error.instructions}}</mat-error>
                 </mat-form-field>
             </div>
             <div class='mat-form-field-container' fxLayoutAlign="start center">
                 <mat-form-field>
-                    <input matInput placeholder="Link" formControlName='link'>
+                    <input matInput placeholder="Link" formControlName='links'>
                 </mat-form-field>
             </div>
 
+            <mat-error *ngIf='recipeForm.errors?.ingredients'>You need at least one ingredient!</mat-error>
+
             <mat-card-actions fxLayoutGap="10px">
-                <button mat-raised-button color="primary" type="submit" [disabled]="recipeForm.invalid"
+                <button mat-raised-button color="primary" type="submit" [disabled]='recipeForm.invalid'
                     color="primary">Submit</button>
-                <button mat-raised-button color="warn" type="button" [routerLink]='["../"]'>Cancel</button>
+                <button mat-raised-button color="warn" type="button" [routerLink]='["/recipes"]'>Cancel</button>
             </mat-card-actions>
-            <mat-error class="error" *ngIf='requiredTitle'>Recipe name is required</mat-error>
 
         </mat-card-content>
     </form>
