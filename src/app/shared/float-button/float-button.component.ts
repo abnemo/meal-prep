@@ -15,7 +15,6 @@ export class FloatButtonComponent {
   @Input() data: any;
   @Output() added = new EventEmitter<any>();
   buttons: any[] = [];
-  onComplete: Subscription
   fabTogglerState = 'inactive';
 
   constructor(
@@ -44,14 +43,9 @@ export class FloatButtonComponent {
       dialogRef.afterClosed().subscribe(() => {
         this.fabTogglerState = 'inactive'
       })
-      this.onComplete = dialogRef.componentInstance.onComplete
+      dialogRef.componentInstance.onComplete
         .subscribe(data => this.added.emit(data))
     }
     this.fabTogglerState === 'active' ? this.hideItems() : this.showItems();
   }
-
-  // ngOnDestroy(): void {
-  //   this.onComplete.unsubscribe()
-  // }
-
 }

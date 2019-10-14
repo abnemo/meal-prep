@@ -13,8 +13,6 @@ export class PantryComponent implements OnInit {
   data = { location: 'pantry' };
   pantry: Ingredient[];
   searchText: string;
-  private subDelete: Subscription;
-  private subUpdate: Subscription;
 
   constructor(
     private pantryService: PantryService,
@@ -38,14 +36,14 @@ export class PantryComponent implements OnInit {
     dialogConfig.data = ingredient
     const dialogRef = this.dialog.open(IngredientDialogComponent, dialogConfig);
 
-    this.subDelete = dialogRef.componentInstance.onDelete
+    dialogRef.componentInstance.onDelete
       .subscribe((id) => {
         this.pantryService.removeIngredient(id).subscribe(() =>
           this.pantry = this.pantry.filter(item => item.id !== id))
       })
 
 
-    this.subUpdate = dialogRef.componentInstance.onComplete
+    dialogRef.componentInstance.onComplete
       .subscribe((data) => {
         this.pantryService.updateIngredient(data)
           .subscribe(
@@ -69,14 +67,9 @@ export class PantryComponent implements OnInit {
   onAdd(event: Ingredient) {
     this.pantryService.addIngredient(event)
       .subscribe((res) => {
-        const ingredient = res.data
+        const ingredient = res['data']
         this.pantry.push(ingredient)
       })
   }
-
-  // ngOnDestroy(): void {
-  //   this.subDelete.unsubscribe()
-  //   this.subUpdate.unsubscribe()
-  // }
 
 }
