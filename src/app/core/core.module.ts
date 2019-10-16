@@ -9,7 +9,6 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { SharedModule } from '../shared/shared.module';
 
-
 export function jwtTokenGetter() {
   return localStorage.getItem('token');
 }
@@ -25,7 +24,7 @@ const JWTConfig = {
 @NgModule({
   declarations: [AppLayoutComponent, ToolbarComponent, SidenavComponent],
   imports: [SharedModule, RouterModule, HttpClientModule, JwtModule.forRoot(JWTConfig)],
-  exports: [AppLayoutComponent, ToolbarComponent, SidenavComponent]
+  exports: [AppLayoutComponent, ToolbarComponent, SidenavComponent],
 })
 
 export class CoreModule extends EnsureModuleLoadedOnceGuard {

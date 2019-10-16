@@ -4,6 +4,6 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [PantryRoutingModule.components],
-  imports: [SharedModule, PantryRoutingModule]
+  imports: [SharedModule, PantryRoutingModule],
 })
 export class PantryModule { }

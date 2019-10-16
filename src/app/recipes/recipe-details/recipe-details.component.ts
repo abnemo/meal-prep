@@ -13,6 +13,7 @@ import { RecipesService } from '../recipes.service';
 export class RecipeDetailsComponent implements OnInit, OnDestroy {
   recipe: Recipe;
   private sub: Subscription
+
   constructor(
     private recipesService: RecipesService,
     private activeRoute: ActivatedRoute,
@@ -31,5 +32,4 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe()
   }
-
 }

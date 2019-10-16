@@ -9,16 +9,20 @@ import { FilterTextboxModule } from './filter-textbox/filter-textbox.module';
 import { FilterPipe } from './pipes/filter.pipe';
 import { FloatButtonModule } from './float-button/float-button.module';
 import { IngredientDialogModule } from './ingredient-dialog/ingredient-dialog.module';
-import { RecipeListModule } from './recipe-list/recipe-list.module';
+import { HoldableDirective } from './directives/holdable.directive';
+import { RecipeListComponent } from './recipe-list/recipe-list.component';
+import { RouterModule } from '@angular/router';
+import { IngredientCardModule } from './ingredient-card/ingredient-card.module';
+import { SwipeModule } from './swipe/swipe.module';
 
 const MaterialModules = [MatSidenavModule, MatToolbarModule, MatButtonModule, MatCardModule, MatInputModule, MatDialogModule, MatTableModule, MatMenuModule, MatIconModule, MatListModule,
   MatProgressSpinnerModule, MatOptionModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule]
 
 @NgModule({
-  declarations: [FilterPipe],
-  imports: [CommonModule, FlexLayoutModule, MaterialModules,
-    FilterTextboxModule, FloatButtonModule, IngredientDialogModule, RecipeListModule],
-  exports: [CommonModule, MaterialModules, FlexLayoutModule,
-    FilterTextboxModule, FilterPipe, FloatButtonModule, IngredientDialogModule, RecipeListModule],
+  declarations: [FilterPipe, HoldableDirective, RecipeListComponent],
+  imports: [CommonModule, FlexLayoutModule, RouterModule, MaterialModules,
+    FilterTextboxModule, FloatButtonModule, IngredientDialogModule, IngredientCardModule, SwipeModule],
+  exports: [CommonModule, MaterialModules, FlexLayoutModule, RouterModule, HoldableDirective, RecipeListComponent,
+    FilterTextboxModule, FilterPipe, FloatButtonModule, IngredientDialogModule, IngredientCardModule, SwipeModule],
 })
 export class SharedModule { }
