@@ -1,8 +1,9 @@
 <div class='recipe-list' fxLayout="row wrap">
-    <div *ngFor='let recipe of recipes'>
-        <mat-card class="recipe-card">
-            <mat-card-header>
+    <div *ngFor='let recipe of recipes; let i = index'>
+        <mat-card class="recipe-card" holdable (holdTime)='holding($event)'>
+            <mat-card-header fxLayout="row space-between">
                 <mat-card-title>{{recipe.title}}</mat-card-title>
+                <mat-icon [ngStyle]="{'color': highlightColor}">restaurant</mat-icon>
             </mat-card-header>
             <img [routerLink]="['/recipes', recipe.id]" mat-card-image src="assets/images/plateImage.png">
             <mat-card-actions>
@@ -12,3 +13,8 @@
         </mat-card>
     </div>
 </div>
+
+<span>{{eventText}}</span>
+<!-- holdable (holdTime)='holding($event)' -->
+
+<!-- (press)="onPress($event, i)" (pressUp)="onPressUp($event, i)" -->

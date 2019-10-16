@@ -10,6 +10,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { FloatButtonModule } from './float-button/float-button.module';
 import { IngredientDialogModule } from './ingredient-dialog/ingredient-dialog.module';
 import { RecipeListModule } from './recipe-list/recipe-list.module';
+import { HoldableDirective } from './directives/holdable.directive';
 
 const MaterialModules = [MatSidenavModule, MatToolbarModule, MatButtonModule, MatCardModule, MatInputModule, MatDialogModule, MatTableModule, MatMenuModule, MatIconModule, MatListModule,
   MatProgressSpinnerModule, MatOptionModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule]
