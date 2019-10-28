@@ -39,9 +39,11 @@
                     <a href='{{link}}' target="_blank">{{link}}</a>
                 </div>
             </div>
-
-            <button mat-raised-button color="primary" type="button" color="accent"
-                [routerLink]="['/recipes', recipe.id, 'edit']">Edit</button>
+            <mat-card-actions fxLayout="row" fxLayoutGap="10px">
+                <button mat-raised-button color="primary" type="button"
+                    [routerLink]="['/recipes', recipe.id, 'edit']">Edit</button>
+                <button mat-raised-button color="warn" type="button" (click)='removeRecipe(recipe.id)'>Remove</button>
+            </mat-card-actions>
         </mat-card-content>
     </div>
 </div>

@@ -9,8 +9,8 @@ import { swipeAnimations } from './swipe.animations';
 })
 
 export class SwipeComponent implements OnInit {
+  @Input() info;
   @Output() swiped = new EventEmitter<any>()
-  slideThreshold: number = 30
   elementLeftSign = true;
   done = false;
   constructor() { }
@@ -18,6 +18,7 @@ export class SwipeComponent implements OnInit {
   ngOnInit() { }
 
   onPanRight(event, elementReference) {
+    console.log('info', this.info)
     elementReference.style.left = event.deltaX + 'px';
     elementReference.offsetLeft > 0 ? this.elementLeftSign = true : this.elementLeftSign = false;
   }

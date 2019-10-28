@@ -1,0 +1,12 @@
+<div class="recipe-card" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card>
+        <mat-card-content>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <img mat-card-image src="assets/images/plateImage.png">
+                <mat-card-title [routerLink]="['/recipes', recipe.id]">{{recipe.title}}</mat-card-title>
+                <mat-icon [ngStyle]="{'color': recipe.selected ? 'red' : 'black' }">restaurant</mat-icon>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+</div>

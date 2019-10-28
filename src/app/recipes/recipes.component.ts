@@ -14,6 +14,7 @@ export class RecipesComponent implements OnInit {
     location: 'recipes',
     path: ['/recipes/0/edit']
   }
+  info: string = 'recipes'
 
   constructor(
     private router: Router,

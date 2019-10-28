@@ -1,6 +1,7 @@
 <div class='swipe-main-canvas'>
     <div class="delete-indicator" fxLayout="row" fxLayoutAlign="start center">
         <mat-icon class="delete-icon" *ngIf="elementLeftSign">delete_sweep</mat-icon>
+        <mat-icon *ngIf='elementLeftSing && info === "recipes"'>add_shopping_cart</mat-icon>
     </div>
     <div #elementReference class="item-container" [@slideLeft]="done" (@slideLeft.done)=alignComplete($event)
         (panright)='onPanRight($event,elementReference)' (panend)='panend($event)'>

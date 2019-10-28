@@ -1,12 +1,12 @@
 <div class='recipe-list' fxLayout="row wrap">
     <div *ngFor='let recipe of recipes; let i = index'>
         <mat-card class="recipe-card" holdable (holdTime)='holding($event, i)'>
+            <img [routerLink]="['/recipes', recipe.id]" mat-card-image src="assets/images/plateImage.png">
             <mat-card-header fxLayout="row space-between">
                 <mat-card-title>{{recipe.title}}</mat-card-title>
                 <mat-icon [ngStyle]="{'color': recipe.selected ? 'red' : 'black' }">restaurant</mat-icon>
             </mat-card-header>
-            <img [routerLink]="['/recipes', recipe.id]" mat-card-image src="assets/images/plateImage.png">
-            <mat-card-actions>
+            <mat-card-actions fxLayoutAlign="end center">
                 <button mat-button [routerLink]="['/recipes', recipe.id, 'edit']">Edit</button>
                 <button mat-button (click)='removeRecipe(recipe.id)'>Remove</button>
             </mat-card-actions>

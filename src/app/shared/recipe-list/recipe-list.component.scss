@@ -3,15 +3,11 @@
   max-width: 900px;
   margin: 0 auto;
   .recipe-card {
+    height: 80%;
     width: 150px;
     margin: 20px;
   }
 }
-
-a {
-  text-decoration: none;
-  color: white;
-
 
 @media screen and (min-width: 1000px) {
     .recipe-list {
@@ -23,5 +19,4 @@ a {
     .recipe-list {
         min-width: 330px;
     } 
-}
 }

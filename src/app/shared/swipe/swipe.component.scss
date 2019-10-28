@@ -1,11 +1,11 @@
 @import "src/assets/styles/variables";
 .swipe-main-canvas{
-  ::ng-deep
+  height: 100%;
   mat-list-item .mat-list-item-content {
     padding: 0 !important;
   }
   .delete-indicator {
-    height: 59px;
+    height: 100%;
     width: calc(100% - 65px);
     background-color: red;
     display: flex;

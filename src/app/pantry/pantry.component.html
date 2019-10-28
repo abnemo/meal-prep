@@ -2,7 +2,7 @@
 <mp-float-button [data]='data' (added)='onAdd($event)'></mp-float-button>
 
 <div class='swipe-ingredient' *ngFor='let ingredient of pantry | filter: searchText'>
-    <mp-swipe (swiped)='onSwipe($event, ingredient)'>
+    <mp-swipe (swiped)='onSwipe($event, ingredient)' [info]='info'>
         <mp-ingredient-card [ingredient]='ingredient'></mp-ingredient-card>
     </mp-swipe>
 </div>

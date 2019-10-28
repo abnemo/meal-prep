@@ -7,8 +7,7 @@ import { GestureConfig } from './config/gesture-config';
 
 @NgModule({
   declarations: [SwipeComponent],
-  imports: [
-    CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule],
   exports: [SwipeComponent],
   entryComponents: [SwipeComponent],
   providers: [{

@@ -22,22 +22,22 @@ export class RecipeListComponent implements OnInit {
     this.remove.emit(id)
   }
 
-  holding(event, index) {
-    console.log(this.selectedRecipes)
-    if (event === 500) {
-      // this.recipes[index].selected = !this.recipes[index].selected
-      // this.selectedRecipes = _.filter(this.recipes, 'selected')
-      // this.selectedRecipes = _.reject(this.selectedRecipes, (elem) => {
-      //   return elem['data']['id'] === this.recipes[index]['id'];
-      // });
-      // this.selectedRecipes.push({ data: this.recipes[index], selected: true });
-      console.log(this.selectedRecipes)
-      this.selected.emit(this.selectedRecipes)
-    }
-  }
+  // holding(event, index) {
+  //   console.log(this.selectedRecipes)
+  //   if (event === 500) {
+  //     this.recipes[index].selected = !this.recipes[index].selected
+  //     this.selectedRecipes = _.filter(this.recipes, 'selected')
+  //     this.selectedRecipes = _.reject(this.selectedRecipes, (elem) => {
+  //       return elem['data']['id'] === this.recipes[index]['id'];
+  //     });
+  //     this.selectedRecipes.push({ data: this.recipes[index], selected: true });
+  //     console.log(this.selectedRecipes)
+  //     this.selected.emit(this.selectedRecipes)
+  //   }
+  // }
 
-  isAdded(id) {
-    const ids = _.map(this.selectedRecipes, 'data.id');
-    return ids.indexOf(id) !== -1;
-  }
+  // isAdded(id) {
+  //   const ids = _.map(this.selectedRecipes, 'data.id');
+  //   return ids.indexOf(id) !== -1;
+  // }
 }
