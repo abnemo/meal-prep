@@ -4,11 +4,14 @@
     margin-bottom: 3px;
     width: 100%;
     mat-card {
+        img {
+            pointer-events: none;
+        }
         width: 100%;
         .mat-card-image {
             margin: 0;
-            height: 150px;
-            width: 200px;
+            height: 60px;
+            width: 100px;
         }
     }
   }

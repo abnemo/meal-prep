@@ -6,5 +6,6 @@ export interface Recipe {
   title: string,
   ingredients: Ingredient[],
   instructions: string,
-  links?: string
+  links?: string,
+  selected?: boolean
 }

@@ -19,6 +19,13 @@ export class RecipesService {
     )
   }
 
+  getWeekPrep(): Observable<Recipe[]> {
+    return this.authHttp.get<Recipe[]>(`${environment.API}/recipes?filter=inPrep`).pipe(
+      map((res: any) => res.data),
+      catchError(this.handleError)
+    )
+  }
+
   getRecipe(id: string): Observable<Recipe> {
     if (id === '0') return of(this.initializeRecipe())
 
@@ -45,6 +52,7 @@ export class RecipesService {
   }
 
   updateRecipe(recipe: Recipe): Observable<Recipe> {
+    console.log(recipe)
     return this.authHttp.put<Recipe>(`${environment.API}/recipes/${recipe.id}`, recipe)
       .pipe(
         map(() => recipe),

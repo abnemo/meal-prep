@@ -1,1 +1,16 @@
-<p>weekprep works!</p>
+<div class='weekprep-list'>
+    <div fxLayoutAlign='center center'>
+        <h2>Week Prep</h2>
+    </div>
+
+    <div class='swipe-weekprep' *ngFor='let recipe of weekPrep'>
+        <mat-icon>remove_circle_outline</mat-icon>
+        <mp-swipe [info]='info' (swiped)='onSwipe($event, recipe)'>
+            <mp-recipe-card [recipe]='recipe'></mp-recipe-card>
+        </mp-swipe>
+    </div>
+</div>
+<div class='fab-container'>
+    <button class="fab-toggler" color='accent' mat-raised-button (click)='generateShoppingList()'>Generate shopping
+        list</button>
+</div>

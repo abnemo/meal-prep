@@ -3,5 +3,13 @@ mp-ingredient-card {
 }
 
 .swipe-ingredient {
+    position: relative;
+    background: red;
     margin: 0 20px;
+    mat-icon {
+        color: white;
+        position: absolute;
+        top: 15px;
+        left: 40px;
+    }
 }

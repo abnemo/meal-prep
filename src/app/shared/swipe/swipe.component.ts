@@ -9,8 +9,8 @@ import { swipeAnimations } from './swipe.animations';
 })
 
 export class SwipeComponent implements OnInit {
-  @Input() info;
   @Output() swiped = new EventEmitter<any>()
+  @Input() info
   elementLeftSign = true;
   done = false;
   constructor() { }
@@ -18,17 +18,14 @@ export class SwipeComponent implements OnInit {
   ngOnInit() { }
 
   onPanRight(event, elementReference) {
-    console.log('info', this.info)
     elementReference.style.left = event.deltaX + 'px';
     elementReference.offsetLeft > 0 ? this.elementLeftSign = true : this.elementLeftSign = false;
   }
 
   panend(event) {
-    if (event.deltaX > 200) {
-      this.swiped.emit('left')
-    } else {
-      this.done = true
-    }
+    if (event.deltaX > 200 && this.info === 'ingredient') this.swiped.emit('right')
+    if (event.deltaX > 200 && this.info === 'recipes') this.swiped.emit('selected')
+    this.done = true
   }
 
   alignComplete(event): void {

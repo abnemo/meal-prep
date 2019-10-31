@@ -9,7 +9,7 @@ import { Ingredient } from 'src/models/ingredient.model';
 export class PantryComponent implements OnInit {
   pantry: Ingredient[];
   searchText: string;
-  info: string = 'pantry'
+  info: string = 'ingredient'
 
   constructor(
     private pantryService: PantryService,

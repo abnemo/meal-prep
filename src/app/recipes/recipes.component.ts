@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Recipe } from 'src/models/recipe.model';
 import { Router } from '@angular/router';
 import { RecipesService } from './recipes.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'mp-recipes',
   templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.scss']
+  styleUrls: ['./recipes.component.scss'],
 })
+
 export class RecipesComponent implements OnInit {
   recipes: Recipe[]
+  info: string = 'recipes'
   data = {
     location: 'recipes',
     path: ['/recipes/0/edit']
   }
-  info: string = 'recipes'
+  selectedRecipes = [];
 
   constructor(
     private router: Router,
@@ -32,6 +35,17 @@ export class RecipesComponent implements OnInit {
   removeRecipe(id: string) {
     this.recipes = this.recipes.filter(item => item.id !== id)
     this.recipeService.removeRecipe(id)
+  }
+
+  onSwipe(event, recipe) {
+    let index = this.recipes.indexOf(recipe)
+    this.recipes.filter(elem => {
+      if (elem.id === recipe.id) {
+        this.recipes[index] = { ...recipe, inPrep: !recipe.inPrep }
+        console.log(this.recipes[index])
+        this.recipeService.updateRecipe(this.recipes[index]).subscribe(res => console.log(res))
+      }
+    })
   }
 
 }

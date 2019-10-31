@@ -8,7 +8,7 @@ import {
 
 export const swipeAnimations = [
   trigger('slideLeft', [
-    transition('* => *', animate(100, keyframes([
+    transition('* => *', animate(200, keyframes([
       style({ left: '*', offset: 0 }),
       style({ left: '0', offset: 1 }),
     ])

@@ -3,10 +3,10 @@
         <h2>Your recipes</h2>
     </div>
     <div class='swipe-recipe' *ngFor='let recipe of recipes'>
-        <mp-swipe (swiped)='onSwipe($event, recipe)' [info]='info'>
+        <mat-icon>add_circle_outline</mat-icon>
+        <mp-swipe [info]='info' (swiped)='onSwipe($event, recipe)'>
             <mp-recipe-card [recipe]='recipe'></mp-recipe-card>
         </mp-swipe>
     </div>
-    <!-- <mp-recipe-list [recipes]='recipes' (remove)='removeRecipe($event)'></mp-recipe-list> -->
 </div>
 <mp-float-button [data]='data'></mp-float-button>
