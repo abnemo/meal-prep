@@ -10,7 +10,7 @@ import { swipeAnimations } from './swipe.animations';
 
 export class SwipeComponent implements OnInit {
   @Output() swiped = new EventEmitter<any>()
-  @Input() info
+  // @Input() info
   elementLeftSign = true;
   done = false;
   constructor() { }
@@ -23,8 +23,7 @@ export class SwipeComponent implements OnInit {
   }
 
   panend(event) {
-    if (event.deltaX > 200 && this.info === 'ingredient') this.swiped.emit('right')
-    if (event.deltaX > 200 && this.info === 'recipes') this.swiped.emit('selected')
+    if (event.deltaX > 200) this.swiped.emit('swiped')
     this.done = true
   }
 

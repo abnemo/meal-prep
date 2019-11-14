@@ -1,0 +1,15 @@
+mp-ingredient-card {
+    width: 100%;
+}
+
+.swipe-ingredient {
+    position: relative;
+    background: red;
+    margin: 0 20px;
+    mat-icon {
+        color: white;
+        position: absolute;
+        top: 15px;
+        left: 40px;
+    }
+}

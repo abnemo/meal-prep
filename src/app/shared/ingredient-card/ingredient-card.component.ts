@@ -11,7 +11,7 @@ import { IngredientDialogComponent } from '../ingredient-dialog/ingredient-dialo
 })
 export class IngredientCardComponent implements OnInit {
   @Input() ingredient: Ingredient;
-  @Input() pantry: Ingredient[];
+  @Input() ingredientList: Ingredient[];
 
   constructor(
     private pantryService: PantryService,
@@ -21,6 +21,7 @@ export class IngredientCardComponent implements OnInit {
   ngOnInit() { }
 
   editIngredient(ingredient: Ingredient) {
+    console.log(ingredient)
     const dialogConfig = new MatDialogConfig();
     dialogConfig.height = '550px';
     dialogConfig.width = '400px';
@@ -30,18 +31,19 @@ export class IngredientCardComponent implements OnInit {
     dialogRef.componentInstance.onDelete
       .subscribe((id) => {
         this.pantryService.removeIngredient(id).subscribe(() =>
-          this.pantry = this.pantry.filter(item => item.id !== id))
+          this.ingredientList = this.ingredientList.filter(item => item.id !== id))
       })
 
 
     dialogRef.componentInstance.onComplete
       .subscribe((data) => {
+        console.log(data)
         this.pantryService.updateIngredient(data)
           .subscribe(
             (res) => {
-              this.pantry.forEach((ingredient, index) => {
+              this.ingredientList.forEach((ingredient, index) => {
                 if (ingredient.id === this.getIngredient(res.id).id) {
-                  this.pantry[index] = res
+                  this.ingredientList[index] = res
                 }
               })
             })
@@ -49,7 +51,7 @@ export class IngredientCardComponent implements OnInit {
   }
 
   getIngredient(id: string) {
-    const list = this.pantry.filter((ingredient) => {
+    const list = this.ingredientList.filter((ingredient) => {
       return ingredient.id === id
     })
     return list[0]

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Ingredient } from 'src/models/ingredient.model';
 
 export interface PantryResponse {
@@ -26,6 +26,7 @@ export class PantryService {
   }
 
   updateIngredient(ingredient: Ingredient): Observable<Ingredient> {
+    console.log(ingredient)
     return this.authHttp.put<Ingredient>(`${environment.API}/pantry/${ingredient.id}`, ingredient)
       .pipe(
         map(() => ingredient),

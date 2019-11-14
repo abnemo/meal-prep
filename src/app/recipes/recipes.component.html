@@ -4,7 +4,7 @@
     </div>
     <div class='swipe-recipe' *ngFor='let recipe of recipes'>
         <mat-icon>add_circle_outline</mat-icon>
-        <mp-swipe [info]='info' (swiped)='onSwipe($event, recipe)'>
+        <mp-swipe (swiped)='onSwipe($event, recipe)'>
             <mp-recipe-card [recipe]='recipe'></mp-recipe-card>
         </mp-swipe>
     </div>

@@ -31,7 +31,7 @@ export class IngredientDialogComponent implements OnInit {
         name: ['', Validators.required],
         quantity: [null, [Validators.required, integerValidator]],
         measurement: ['', Validators.required],
-        expiration: [''],
+        expiration: [],
         price: [null, [integerValidator]]
       }
     );
@@ -65,6 +65,7 @@ export class IngredientDialogComponent implements OnInit {
   }
 
   onSubmit(form: Ingredient) {
+    console.log(form)
     form.id = this.data.id
     this.onComplete.emit(form)
     this.dialogRef.close()

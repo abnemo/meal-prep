@@ -3,7 +3,7 @@
 
 <div class='swipe-ingredient' *ngFor='let ingredient of pantry | filter: searchText'>
     <mat-icon>delete_sweep</mat-icon>
-    <mp-swipe (swiped)='onSwipe($event, ingredient)' [info]='info'>
-        <mp-ingredient-card [ingredient]='ingredient'></mp-ingredient-card>
+    <mp-swipe (swiped)='onSwipe($event, ingredient)'>
+        <mp-ingredient-card [ingredient]='ingredient' [ingredientList]='pantry'></mp-ingredient-card>
     </mp-swipe>
 </div>

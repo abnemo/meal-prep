@@ -12,7 +12,6 @@ import * as _ from 'lodash';
 
 export class RecipesComponent implements OnInit {
   recipes: Recipe[]
-  info: string = 'recipes'
   data = {
     location: 'recipes',
     path: ['/recipes/0/edit']
@@ -42,7 +41,6 @@ export class RecipesComponent implements OnInit {
     this.recipes.filter(elem => {
       if (elem.id === recipe.id) {
         this.recipes[index] = { ...recipe, inPrep: !recipe.inPrep }
-        console.log(this.recipes[index])
         this.recipeService.updateRecipe(this.recipes[index]).subscribe(res => console.log(res))
       }
     })

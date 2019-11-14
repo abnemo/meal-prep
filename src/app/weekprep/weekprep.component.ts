@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipesService } from '../recipes/recipes.service';
 import { Recipe } from 'src/models/recipe.model';
+import { WeekPrepService } from './weekprep.service';
 
 @Component({
   selector: 'app-weekprep',
@@ -9,9 +10,9 @@ import { Recipe } from 'src/models/recipe.model';
 })
 export class WeekPrepComponent implements OnInit {
   weekPrep: Recipe[]
-  info: string = "recipes"
   constructor(
-    private recipeService: RecipesService
+    private recipeService: RecipesService,
+    private weekPrepService: WeekPrepService
   ) { }
 
   ngOnInit() {
@@ -19,12 +20,15 @@ export class WeekPrepComponent implements OnInit {
   }
 
   onSwipe(event, recipe) {
-    console.log('recipe', recipe)
     this.weekPrep = this.weekPrep.filter(item => item.id !== recipe.id)
   }
 
   generateShoppingList() {
-    console.log('generating')
+    const prepList = []
+    for (let recipe of this.weekPrep) {
+      prepList.push(recipe.id)
+    }
+    this.weekPrepService.generateShoppingList(prepList)
   }
 
 }

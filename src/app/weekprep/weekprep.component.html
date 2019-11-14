@@ -5,7 +5,7 @@
 
     <div class='swipe-weekprep' *ngFor='let recipe of weekPrep'>
         <mat-icon>remove_circle_outline</mat-icon>
-        <mp-swipe [info]='info' (swiped)='onSwipe($event, recipe)'>
+        <mp-swipe (swiped)='onSwipe($event, recipe)'>
             <mp-recipe-card [recipe]='recipe'></mp-recipe-card>
         </mp-swipe>
     </div>
