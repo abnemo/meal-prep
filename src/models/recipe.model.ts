@@ -7,5 +7,5 @@ export interface Recipe {
   ingredients: Ingredient[],
   instructions: string,
   links?: string,
-  selected?: boolean
+  inPrep?: boolean
 }

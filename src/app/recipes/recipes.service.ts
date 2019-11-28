@@ -52,7 +52,6 @@ export class RecipesService {
   }
 
   updateRecipe(recipe: Recipe): Observable<Recipe> {
-    console.log(recipe)
     return this.authHttp.put<Recipe>(`${environment.API}/recipes/${recipe.id}`, recipe)
       .pipe(
         map(() => recipe),

@@ -1,12 +1,16 @@
-<div class="recipe-card" fxLayout="column" fxLayoutAlign="center center">
-    <mat-card>
-        <mat-card-content>
-            <div fxLayout="row" fxLayoutAlign="space-between center">
-                <img mat-card-image src="assets/images/plateImage.png">
-                <mat-card-title [routerLink]="['/recipes', recipe.id]">{{recipe.title}}</mat-card-title>
-                <mat-icon [ngStyle]="{'color': recipe.inPrep ? 'red' : 'black' }">restaurant</mat-icon>
-            </div>
-        </mat-card-content>
-    </mat-card>
-
-</div>
+<mat-card>
+    <mat-card-header fxLayout='row' fxLayoutAlign='space-between'>
+        <mat-card-title>{{recipe.title}}</mat-card-title>
+        <mat-icon [ngStyle]="{'color': recipe.inPrep ? 'red' : 'black' }">restaurant</mat-icon>
+    </mat-card-header>
+    <mat-card-content [routerLink]="['/recipes',recipe.id]">
+        <p>
+            {{recipe.instructions}}
+        </p>
+    </mat-card-content>
+    <mat-card-actions fxLayout='row' fxLayoutAlign='center center'>
+        <button mat-button color="primary" type="button"
+            (click)='addMeal(recipe)'>{{recipe.inPrep ? "Remove from meal plan" : "Add to meal plan"}}</button>
+        <button mat-button color="primary" type="button" [routerLink]="['/recipes', recipe.id, 'edit']">Edit</button>
+    </mat-card-actions>
+</mat-card>

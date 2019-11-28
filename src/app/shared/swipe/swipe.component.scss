@@ -1,24 +1,10 @@
 @import "src/assets/styles/variables";
   .item-container {
-    padding: 0 16px !important;
     background-color: #fff;
     display: flex;
     flex-direction: row;
     align-items: center;
     box-sizing: border-box;
-    padding: 0 16px;
     position: relative;
     height: inherit;
   }
-
-@media screen and (min-width: 1000px) {
-    .item-container{
-        min-width: $form-max-width;
-    } 
-}
-
-@media screen and (max-width: 1000px) {
-    .item-container {
-        min-width: 330px;
-    } 
-}

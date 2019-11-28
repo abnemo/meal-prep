@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { Recipe } from 'src/models/recipe.model';
 
 @Component({
@@ -9,8 +9,13 @@ import { Recipe } from 'src/models/recipe.model';
 })
 export class RecipeCardComponent implements OnInit {
   @Input() recipe: Recipe;
+  @Output() added = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() { }
+
+  addMeal(recipe) {
+    this.added.emit(recipe)
+  }
 
 }

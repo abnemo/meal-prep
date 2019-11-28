@@ -10,20 +10,24 @@ import { swipeAnimations } from './swipe.animations';
 
 export class SwipeComponent implements OnInit {
   @Output() swiped = new EventEmitter<any>()
-  // @Input() info
   elementLeftSign = true;
   done = false;
   constructor() { }
 
   ngOnInit() { }
 
-  onPanRight(event, elementReference) {
-    elementReference.style.left = event.deltaX + 'px';
+  onPanMove(event, elementReference) {
+    if (event.deltaX <= 0) {
+      elementReference.style.left = '0px';
+      return
+    } else {
+      elementReference.style.left = `${event.deltaX}px`;
+    }
     elementReference.offsetLeft > 0 ? this.elementLeftSign = true : this.elementLeftSign = false;
   }
 
   panend(event) {
-    if (event.deltaX > 200) this.swiped.emit('swiped')
+    if (event.deltaX > 120) this.swiped.emit('swiped')
     this.done = true
   }
 
