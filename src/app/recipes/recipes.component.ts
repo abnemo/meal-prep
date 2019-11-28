@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Recipe } from 'src/models/recipe.model';
+import { Recipe } from 'src/app/core/models/recipe.model';
 import { Router } from '@angular/router';
 import { RecipesService } from './recipes.service';
 import * as _ from 'lodash';
@@ -33,7 +33,7 @@ export class RecipesComponent implements OnInit {
 
   removeRecipe(id: string) {
     this.recipes = this.recipes.filter(item => item.id !== id)
-    this.recipeService.removeRecipe(id)
+    this.recipeService.removeRecipe(id).subscribe()
   }
 
   onSwipe(event, recipe) {

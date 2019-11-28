@@ -38,16 +38,6 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  updateRole(): void {
-    this.token = localStorage.getItem('token');
-    if (this.token) {
-      this.http.get(`${environment.API}/account/update`)
-        .subscribe((res: any) => {
-          if (res.token) this.handleToken(res);
-        });
-    }
-  }
-
   loggedIn(): boolean {
     this.token = localStorage.getItem('token');
     return this.token != null && !this.jwtHelper.isTokenExpired(this.token);

@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Ingredient } from 'src/models/ingredient.model';
+import { Ingredient } from 'src/app/core/models/ingredient.model';
 import { PantryService } from 'src/app/pantry/pantry.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { IngredientDialogComponent } from '../ingredient-dialog/ingredient-dialog.component';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'mp-ingredient-card',
@@ -36,18 +37,17 @@ export class IngredientCardComponent implements OnInit {
 
 
     dialogRef.componentInstance.onComplete
-      .subscribe((data) => {
-        console.log(data)
-        this.pantryService.updateIngredient(data)
-          .subscribe(
-            (res) => {
-              this.ingredientList.forEach((ingredient, index) => {
-                if (ingredient.id === this.getIngredient(res.id).id) {
-                  this.ingredientList[index] = res
-                }
-              })
-            })
-      })
+      .pipe(
+        mergeMap((data) => this.pantryService.updateIngredient(data))
+      )
+      .subscribe(
+        (res) =>
+          this.ingredientList.forEach((ingredient, index) => {
+            if (ingredient.id === this.getIngredient(res.id).id) {
+              this.ingredientList[index] = res
+            }
+          })
+      )
   }
 
   getIngredient(id: string) {

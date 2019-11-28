@@ -4,8 +4,8 @@ import { FormBuilder, Validators, FormArray, FormGroup, AbstractControl, Validat
 import { mergeMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { RecipesService } from '../recipes.service';
-import { Recipe } from 'src/models/recipe.model';
-import { Ingredient } from 'src/models/ingredient.model';
+import { Recipe } from 'src/app/core/models/recipe.model';
+import { Ingredient } from 'src/app/core/models/ingredient.model';
 import { integerValidator } from '../../shared/validators/checkInteger.validator'
 
 enum Fields {

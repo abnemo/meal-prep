@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import { Recipe } from 'src/models/recipe.model';
+import { Recipe } from 'src/app/core/models/recipe.model';
 
 @Component({
   selector: 'mp-recipe-card',

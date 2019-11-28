@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Ingredient } from 'src/models/ingredient.model';
+import { Ingredient } from 'src/app/core/models/ingredient.model';
 import { environment } from 'src/environments/environment';
 import { catchError, map } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
@@ -23,6 +23,9 @@ export class ShoppingListService {
 
   addIngredient(ingredient: Ingredient): Observable<Ingredient> {
     return this.authHttp.post<Ingredient>(`${environment.API}/shopping/add`, ingredient)
+      .pipe(
+        catchError(this.handleError)
+      )
   }
 
   private handleError(error: Response | any) {

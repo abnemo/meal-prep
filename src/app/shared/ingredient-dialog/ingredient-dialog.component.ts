@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Ingredient } from 'src/models/ingredient.model';
+import { Ingredient } from 'src/app/core/models/ingredient.model';
 import { integerValidator } from '../validators/checkInteger.validator';
 
 @Component({

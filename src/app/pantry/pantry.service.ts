@@ -3,9 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Ingredient } from 'src/models/ingredient.model';
+import { Ingredient } from 'src/app/core/models/ingredient.model';
+import { APISuccessResponse } from 'src/app/core/models/responses.model';
 
-export interface PantryResponse {
+interface PantryResponse {
   data: Ingredient[]
 }
 
@@ -23,10 +24,12 @@ export class PantryService {
 
   addIngredient(ingredient: Ingredient): Observable<Ingredient> {
     return this.authHttp.post<Ingredient>(`${environment.API}/pantry`, ingredient)
+      .pipe(
+        catchError(this.handleError)
+      )
   }
 
   updateIngredient(ingredient: Ingredient): Observable<Ingredient> {
-    console.log(ingredient)
     return this.authHttp.put<Ingredient>(`${environment.API}/pantry/${ingredient.id}`, ingredient)
       .pipe(
         map(() => ingredient),
@@ -34,12 +37,15 @@ export class PantryService {
       )
   }
 
-  removeIngredient(id: string) {
+  removeIngredient(id: string): Observable<APISuccessResponse> {
     const options = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       id: id
     };
-    return this.authHttp.post((`${environment.API}/pantry/delete`), options)
+    return this.authHttp.post<APISuccessResponse>((`${environment.API}/pantry/delete`), options)
+      .pipe(
+        catchError(this.handleError)
+      )
   }
 
   private handleError(error: Response | any) {

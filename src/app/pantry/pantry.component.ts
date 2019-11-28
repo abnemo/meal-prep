@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PantryService } from './pantry.service';
-import { Ingredient } from 'src/models/ingredient.model';
+import { Ingredient } from 'src/app/core/models/ingredient.model';
 
 @Component({
   templateUrl: './pantry.component.html',
@@ -9,6 +9,9 @@ import { Ingredient } from 'src/models/ingredient.model';
 export class PantryComponent implements OnInit {
   pantry: Ingredient[];
   searchText: string;
+  data = {
+    location: 'pantry',
+  }
 
   constructor(
     private pantryService: PantryService,

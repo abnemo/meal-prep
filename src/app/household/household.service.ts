@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { tap, catchError } from 'rxjs/operators';
-import { User } from 'src/models/user.model';
+import { User } from 'src/app/core/models/user.model';
 import { Observable, throwError, of } from 'rxjs';
 
 export interface HouseholdResponse {

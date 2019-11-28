@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Ingredient } from 'src/models/ingredient.model';
+import { Ingredient } from 'src/app/core/models/ingredient.model';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ShoppingListService } from './shopping-list.service';

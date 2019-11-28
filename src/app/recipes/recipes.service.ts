@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment'
 import { catchError, map } from 'rxjs/operators';
 import { throwError, Observable, of } from 'rxjs';
-import { Recipe } from 'src/models/recipe.model';
+import { Recipe } from 'src/app/core/models/recipe.model';
+import { APISuccessResponse } from '../core/models/responses.model';
 
 @Injectable({ providedIn: 'root' })
 export class RecipesService {
@@ -49,6 +50,9 @@ export class RecipesService {
 
   addRecipe(data: Recipe): Observable<Recipe> {
     return this.authHttp.post<Recipe>(`${environment.API}/recipes`, data)
+      .pipe(
+        catchError(this.handleError)
+      )
   }
 
   updateRecipe(recipe: Recipe): Observable<Recipe> {
@@ -59,13 +63,15 @@ export class RecipesService {
       )
   }
 
-  removeRecipe(id: string) {
+  removeRecipe(id: string): Observable<APISuccessResponse> {
     const options = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       id: id
     };
-    this.authHttp.post((`${environment.API}/recipes/delete`), options)
-      .subscribe(res => console.log('res', res))
+    return this.authHttp.post<APISuccessResponse>((`${environment.API}/recipes/delete`), options)
+      .pipe(
+        catchError(this.handleError)
+      )
   }
 
   private handleError(error: Response | any) {
