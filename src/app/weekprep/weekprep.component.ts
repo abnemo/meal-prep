@@ -21,8 +21,15 @@ export class WeekPrepComponent implements OnInit {
     this.recipeService.getWeekPrep().subscribe(res => this.weekPrep = res)
   }
 
-  onSwipe(event, recipe) {
-    this.weekPrep = this.weekPrep.filter(item => item.id !== recipe.id)
+  addToMealPlan(event, recipe) {
+    let index = this.weekPrep.indexOf(recipe)
+    this.weekPrep.filter(elem => {
+      if (elem.id === recipe.id) {
+        this.weekPrep[index] = { ...recipe, inPrep: !recipe.inPrep }
+        this.recipeService.updateRecipe(this.weekPrep[index]).subscribe(res => console.log(res))
+        this.weekPrep = this.weekPrep.filter(item => item.id !== recipe.id)
+      }
+    })
   }
 
   generateShoppingList() {

@@ -18,15 +18,3 @@
         font-size: 16px;
     }
 }
-
-@media screen and (min-width: 1000px) {
-    .ingredient-card {
-        min-width: $form-max-width;
-    } 
-}
-
-@media screen and (max-width: 1000px) {
-    .ingredient-card {
-        min-width: 330px;
-    } 
-}

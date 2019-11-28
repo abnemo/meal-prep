@@ -9,9 +9,7 @@ import { Ingredient } from 'src/app/core/models/ingredient.model';
 export class PantryComponent implements OnInit {
   pantry: Ingredient[];
   searchText: string;
-  data = {
-    location: 'pantry',
-  }
+  data = { location: 'pantry' }
 
   constructor(
     private pantryService: PantryService,
@@ -28,11 +26,12 @@ export class PantryComponent implements OnInit {
   }
 
   onAdd(event: Ingredient) {
-    this.pantryService.addIngredient(event)
-      .subscribe((res) => {
-        const ingredient = res['data']
-        this.pantry.push(ingredient)
-      })
+    console.log(event)
+    // this.pantryService.addIngredient(event)
+    //   .subscribe((res) => {
+    //     const ingredient = res['data']
+    //     this.pantry.push(ingredient)
+    //   })
   }
 
   onSwipe(event, ingredient: Ingredient) {

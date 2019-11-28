@@ -10,7 +10,7 @@ import { ShoppingListService } from './shopping-list.service';
 export class ShoppingListComponent implements OnInit {
   shoppingList: Ingredient[]
   data = { location: "pantry" }
-
+  searchText: string;
   constructor(
     private shoppingService: ShoppingListService
   ) { }
@@ -28,6 +28,10 @@ export class ShoppingListComponent implements OnInit {
         const ingredient = res['data']
         this.shoppingList.push(ingredient)
       })
+  }
+
+  getSearch(event: any) {
+    this.searchText = event;
   }
 
 }

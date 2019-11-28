@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from 'src/app/core/models/recipe.model';
 import { Router } from '@angular/router';
 import { RecipesService } from './recipes.service';
@@ -12,6 +12,8 @@ import * as _ from 'lodash';
 
 export class RecipesComponent implements OnInit {
   recipes: Recipe[]
+  inPrep: boolean = false;
+  searchText: string;
   data = {
     location: 'recipes',
     path: ['/recipes/0/edit']
@@ -36,7 +38,8 @@ export class RecipesComponent implements OnInit {
     this.recipeService.removeRecipe(id).subscribe()
   }
 
-  onSwipe(event, recipe) {
+  addToMealPlan(event, recipe) {
+    console.log(recipe)
     let index = this.recipes.indexOf(recipe)
     this.recipes.filter(elem => {
       if (elem.id === recipe.id) {
@@ -44,6 +47,11 @@ export class RecipesComponent implements OnInit {
         this.recipeService.updateRecipe(this.recipes[index]).subscribe(res => console.log(res))
       }
     })
+  }
+
+  getSearch(event: any) {
+    this.searchText = event;
+    console.log(this.searchText)
   }
 
 }
