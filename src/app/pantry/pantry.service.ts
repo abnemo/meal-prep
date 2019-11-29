@@ -6,18 +6,14 @@ import { catchError, map } from 'rxjs/operators';
 import { Ingredient } from 'src/app/core/models/ingredient.model';
 import { APISuccessResponse } from 'src/app/core/models/responses.model';
 
-interface PantryResponse {
-  data: Ingredient[]
-}
-
 @Injectable({ providedIn: 'root' })
 export class PantryService {
 
   constructor(private authHttp: HttpClient) { }
 
   getPantry(): Observable<Ingredient[]> {
-    return this.authHttp.get<PantryResponse>(`${environment.API}/pantry`).pipe(
-      map(res => res.data),
+    return this.authHttp.get<Ingredient[]>(`${environment.API}/pantry`).pipe(
+      map(res => res),
       catchError(this.handleError)
     )
   }
@@ -25,6 +21,10 @@ export class PantryService {
   addIngredient(ingredient: Ingredient): Observable<Ingredient> {
     return this.authHttp.post<Ingredient>(`${environment.API}/pantry`, ingredient)
       .pipe(
+        map((res) => {
+          ingredient.id = res.id
+          return ingredient
+        }),
         catchError(this.handleError)
       )
   }

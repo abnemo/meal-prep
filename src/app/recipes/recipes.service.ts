@@ -15,14 +15,14 @@ export class RecipesService {
 
   getRecipeList(): Observable<Recipe[]> {
     return this.authHttp.get<Recipe[]>(`${environment.API}/recipes`).pipe(
-      map((res: any) => res.data),
+      map((res: any) => res),
       catchError(this.handleError)
     )
   }
 
   getWeekPrep(): Observable<Recipe[]> {
     return this.authHttp.get<Recipe[]>(`${environment.API}/recipes?filter=inPrep`).pipe(
-      map((res: any) => res.data),
+      map((res: any) => res),
       catchError(this.handleError)
     )
   }
@@ -32,7 +32,7 @@ export class RecipesService {
 
     return this.authHttp.get<Recipe>(`${environment.API}/recipes/${id}`)
       .pipe(
-        map((response: any) => response.data),
+        map((response: any) => response),
         catchError(this.handleError)
       )
   }

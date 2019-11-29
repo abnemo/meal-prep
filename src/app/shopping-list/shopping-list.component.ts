@@ -17,17 +17,27 @@ export class ShoppingListComponent implements OnInit {
 
   ngOnInit() {
     this.shoppingService.getShoppingList().subscribe(res => {
-      console.log(res)
       this.shoppingList = res
     })
   }
 
-  onAdd(event: Ingredient) {
-    this.shoppingService.addIngredient(event)
-      .subscribe((res) => {
-        const ingredient = res['data']
-        this.shoppingList.push(ingredient)
-      })
+  onAdd(item: Ingredient) {
+    let existingIngredient = this.shoppingList
+      .filter(ingredient =>
+        ingredient.name === item.name &&
+        ingredient.measurement === item.measurement
+      )[0]
+    if (existingIngredient) {
+      console.log(JSON.stringify(existingIngredient, null, 2))
+      existingIngredient.quantity += item.quantity
+      this.shoppingService.updateIngredient(existingIngredient)
+        .subscribe()
+    } else {
+      this.shoppingService.addIngredient(item)
+        .subscribe((ingredient) => {
+          this.shoppingList.push(ingredient)
+        })
+    }
   }
 
   getSearch(event: any) {

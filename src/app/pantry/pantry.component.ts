@@ -25,13 +25,22 @@ export class PantryComponent implements OnInit {
     this.searchText = event;
   }
 
-  onAdd(event: Ingredient) {
-    console.log(event)
-    // this.pantryService.addIngredient(event)
-    //   .subscribe((res) => {
-    //     const ingredient = res['data']
-    //     this.pantry.push(ingredient)
-    //   })
+  onAdd(item: Ingredient) {
+    let existingIngredient = this.pantry
+      .filter(ingredient =>
+        ingredient.name === item.name &&
+        ingredient.measurement === item.measurement
+      )[0]
+    if (existingIngredient) {
+      existingIngredient.quantity = item.quantity
+      this.pantryService.updateIngredient(existingIngredient)
+        .subscribe()
+    } else {
+      this.pantryService.addIngredient(item)
+        .subscribe((ingredient) => {
+          this.pantry.push(ingredient)
+        })
+    }
   }
 
   onSwipe(event, ingredient: Ingredient) {

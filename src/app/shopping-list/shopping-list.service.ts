@@ -16,7 +16,7 @@ export class ShoppingListService {
 
   getShoppingList(): Observable<Ingredient[]> {
     return this.authHttp.get(`${environment.API}/shopping`).pipe(
-      map(res => res['data']),
+      map((res: Ingredient[]) => res),
       catchError(this.handleError)
     )
   }
@@ -24,6 +24,18 @@ export class ShoppingListService {
   addIngredient(ingredient: Ingredient): Observable<Ingredient> {
     return this.authHttp.post<Ingredient>(`${environment.API}/shopping/add`, ingredient)
       .pipe(
+        map((res) => {
+          ingredient.id = res.id
+          return ingredient
+        }),
+        catchError(this.handleError)
+      )
+  }
+
+  updateIngredient(ingredient: Ingredient): Observable<Ingredient> {
+    return this.authHttp.put<Ingredient>(`${environment.API}/shopping/${ingredient.id}`, ingredient)
+      .pipe(
+        map(() => ingredient),
         catchError(this.handleError)
       )
   }

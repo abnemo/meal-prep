@@ -14,7 +14,7 @@
             </div>
             <div class='mat-form-field-container' fxLayoutAlign="start center">
                 <mat-form-field>
-                    <input matInput placeholder="quantity" formControlName='quantity' required>
+                    <input type="number" matInput placeholder="quantity" formControlName='quantity' required>
                     <mat-error *ngIf='ingredientForm.get("quantity").errors?.required'>Quantity is required.</mat-error>
                     <mat-error *ngIf='ingredientForm.get("quantity").errors?.notInteger'>Quantity must be a number.
                     </mat-error>
@@ -36,7 +36,7 @@
             </div>
             <div class='mat-form-field-container' fxLayoutAlign="start center">
                 <mat-form-field>
-                    <input matInput placeholder="price" formControlName='price'>
+                    <input type="number" matInput placeholder="price" formControlName='price'>
                     <mat-error *ngIf='ingredientForm.get("price").errors?.notInteger'>Price must be a number.
                     </mat-error>
                 </mat-form-field>
