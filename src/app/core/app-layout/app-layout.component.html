@@ -4,6 +4,8 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <mp-toolbar [isHandset$]="isHandset$" (toggleSidenav)="sidenav.toggle()"></mp-toolbar>
-        <router-outlet></router-outlet>
+        <div class="app-content">
+            <router-outlet></router-outlet>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

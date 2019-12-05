@@ -1,16 +1,13 @@
-<div class='weekprep-list' fxLayout='column' fxLayoutAlign='center center'>
-    <div fxLayoutAlign='center center'>
+<div class="weekprep-list" fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayoutAlign="center center">
         <h2>Week Prep</h2>
     </div>
 
-    <div *ngFor='let recipe of weekPrep' fxLayout='column'>
-        <mp-recipe-card [recipe]='recipe' (added)="addToMealPlan($event, recipe)"></mp-recipe-card>
-        <!-- <mat-icon>remove_circle_outline</mat-icon>
-        <mp-swipe (swiped)='onSwipe($event, recipe)'>
-        </mp-swipe> -->
+    <div class="recipe-card-container" *ngFor="let recipe of weekPrep" fxLayout="column">
+        <mp-recipe-card [recipe]="recipe" (added)="addToMealPlan($event, recipe)"></mp-recipe-card>
     </div>
 </div>
-<div class='fab-container'>
-    <button class=" fab-toggler" color='accent' mat-raised-button (click)='generateShoppingList()'>Generate shopping
+<div class="sticky-button" fxLayout="row" fxLayoutAlign="center center" mpRelativeCenter>
+    <button color="accent" mat-raised-button (click)="generateShoppingList()">Generate shopping
         list</button>
 </div>

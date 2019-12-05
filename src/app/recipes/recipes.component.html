@@ -1,11 +1,11 @@
-<div class='recipe-list' fxLayout='column' fxLayoutAlign='center center'>
-    <div fxLayoutAlign='center center'>
+<div fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayoutAlign="center center">
         <h2>Your recipes</h2>
     </div>
-    <mp-filter-textbox (searchFilter)='getSearch($event)'></mp-filter-textbox>
+    <mp-filter-textbox (searchFilter)="getSearch($event)"></mp-filter-textbox>
 
-    <div *ngFor='let recipe of recipes | filter: searchText' fxLayout='column'>
-        <mp-recipe-card [recipe]='recipe' (added)='addToMealPlan($event, recipe)'></mp-recipe-card>
+    <div class="recipe-card-container" *ngFor="let recipe of recipes | filter: searchText" fxLayout="column">
+        <mp-recipe-card [recipe]="recipe" (added)="addToMealPlan($event, recipe)"></mp-recipe-card>
     </div>
 </div>
-<mp-float-button [data]='data'></mp-float-button>
+<mp-float-button [data]="data"></mp-float-button>

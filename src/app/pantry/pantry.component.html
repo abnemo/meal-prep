@@ -1,12 +1,9 @@
-<div fxLayoutAlign='center center'>
+<div fxLayoutAlign="center center">
     <h2>Pantry</h2>
 </div>
-<mp-filter-textbox (searchFilter)='getSearch($event)'></mp-filter-textbox>
-<mp-float-button [data]='data' (added)='onAdd($event)'></mp-float-button>
+<mp-filter-textbox (searchFilter)="getSearch($event)"></mp-filter-textbox>
+<mp-float-button [data]="data" (added)="onAdd($event)"></mp-float-button>
 
-<div class='swipe-ingredient' *ngFor='let ingredient of pantry | filter: searchText'>
-    <mat-icon>delete_sweep</mat-icon>
-    <mp-swipe (swiped)='onSwipe($event, ingredient)'>
-        <mp-ingredient-card [ingredient]='ingredient' [ingredientList]='pantry'></mp-ingredient-card>
-    </mp-swipe>
+<div *ngFor="let ingredient of pantry | filter: searchText">
+    <mp-ingredient-card [ingredient]="ingredient" [ingredientList]="pantry"></mp-ingredient-card>
 </div>

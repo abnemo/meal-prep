@@ -1,12 +1,14 @@
-<h2 fxLayoutAlign="center center">{{result?.name}}</h2>
+<div fxLayoutAlign="center center">
+    <h2>{{result?.name}}</h2>
+</div>
 
 <div class="user-card-container">
-    <div class='user-card' fxLayout="column" fxLayoutAlign="center center" *ngFor='let user of result?.users'>
+    <div class="user-card" fxLayout="column" fxLayoutAlign="center center" *ngFor="let user of result?.users">
         <mat-card>
             <mat-card-content>
                 <div fxLayout="row" fxLayoutAlign="space-between center">
                     <div>{{user.email}}</div>
-                    <div><button mat-raised-button color='primary' (click)='removeUser(user.id)'>Kick out</button>
+                    <div><button mat-raised-button color="primary" (click)="removeUser(user.id)">Kick out</button>
                     </div>
                 </div>
             </mat-card-content>

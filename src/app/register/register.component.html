@@ -1,6 +1,6 @@
 <mat-card-actions class="container">
-    <form fxLayout="column" fxLayoutAlign="center center" [formGroup]='registerForm'
-        (ngSubmit)='onSubmit(registerForm)'>
+    <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="registerForm"
+        (ngSubmit)="onSubmit(registerForm)">
         <mat-card-header>
             <mat-card-title>
                 <h3>Register</h3>
@@ -8,26 +8,26 @@
         </mat-card-header>
         <mat-card-content fxLayout="column" fxLayoutAlign="center center">
             <mat-form-field>
-                <input matInput type='email' placeholder="Email" formControlName='email'>
-                <mat-error *ngIf='error.email'>{{error.email}}</mat-error>
+                <input matInput type="email" placeholder="Email" formControlName="email">
+                <mat-error *ngIf="error.email">{{error.email}}</mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input matInput type='password' placeholder="Password" formControlName='password'>
+                <input matInput type="password" placeholder="Password" formControlName="password">
                 <mat-error *ngIf="error.password">{{error.password}}</mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Household" formControlName='householdName'>
+                <input matInput placeholder="Household" formControlName="householdName">
                 <mat-error *ngIf="error.name">{{error.name}}</mat-error>
             </mat-form-field>
 
             <div>
-                <a routerLink='/login'>Already have an account?</a>
+                <a routerLink="/login">Already have an account?</a>
             </div>
 
         </mat-card-content>
         <mat-card-actions>
             <div>
-                <button mat-raised-button color="primary" type='submit' [disabled]='registerForm.invalid'>Create
+                <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Create
                     account</button>
             </div>
         </mat-card-actions>

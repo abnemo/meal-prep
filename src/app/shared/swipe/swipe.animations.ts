@@ -1,10 +1,4 @@
-import {
-  animate,
-  style,
-  transition,
-  trigger,
-  keyframes
-} from '@angular/animations';
+import { animate, style, transition, trigger, keyframes } from '@angular/animations';
 
 export const swipeAnimations = [
   trigger('slideLeft', [

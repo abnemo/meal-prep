@@ -1,4 +1,4 @@
 <div #elementReference class="item-container" [@slideLeft]="done" (@slideLeft.done)=alignComplete($event)
-    (panmove)='onPanMove($event,elementReference)' (panend)='panend($event)'>
+    (panmove)="onPanMove($event,elementReference)" (panend)="panend($event)">
     <ng-content></ng-content>
 </div>

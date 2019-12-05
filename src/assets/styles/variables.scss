@@ -1,4 +1,7 @@
-$primary-border-color: #e0e0e0;
-
 $form-max-width: 740px;
-$content-margin-top: 30px;
+
+@mixin card-full-width {
+    width: 100%; 
+    box-sizing: border-box;
+    margin-bottom: 5px;
+}

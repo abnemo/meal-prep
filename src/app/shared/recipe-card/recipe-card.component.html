@@ -1,16 +1,17 @@
 <mat-card>
-    <mat-card-header fxLayout='row' fxLayoutAlign='space-between'>
-        <mat-card-title>{{recipe.title}}</mat-card-title>
-        <mat-icon [ngStyle]="{'color': recipe.inPrep ? 'red' : 'black' }">restaurant</mat-icon>
-    </mat-card-header>
-    <mat-card-content [routerLink]="['/recipes',recipe.id]">
-        <p>
+    <div [routerLink]="['/recipes',recipe.id]">
+        <mat-card-header fxLayout="row" fxLayoutAlign="space-between">
+            <mat-card-title>{{recipe.title}}</mat-card-title>
+            <mat-icon [ngStyle]="{'color': recipe.inPrep ? 'red' : 'black' }">restaurant</mat-icon>
+        </mat-card-header>
+        <mat-card-content>
             {{recipe.instructions}}
-        </p>
-    </mat-card-content>
-    <mat-card-actions fxLayout='row' fxLayoutAlign='center center'>
-        <button mat-button color="primary" type="button"
-            (click)='addMeal(recipe)'>{{recipe.inPrep ? "Remove from meal plan" : "Add to meal plan"}}</button>
-        <button mat-button color="primary" type="button" [routerLink]="['/recipes', recipe.id, 'edit']">Edit</button>
+            <!-- <div class="bottom-fade"></div> -->
+        </mat-card-content>
+    </div>
+    <mat-card-actions fxLayout="row">
+        <button mat-button type="button"
+            (click)="addMeal(recipe)">{{recipe.inPrep ? "Remove from plan" : "Add to plan"}}</button>
+        <button mat-button type="button" [routerLink]="['/recipes', recipe.id, 'edit']">Edit</button>
     </mat-card-actions>
 </mat-card>

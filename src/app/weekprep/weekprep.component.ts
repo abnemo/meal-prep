@@ -5,7 +5,7 @@ import { WeekPrepService } from './weekprep.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-weekprep',
+  selector: 'mp-weekprep',
   templateUrl: './weekprep.component.html',
   styleUrls: ['./weekprep.component.scss']
 })

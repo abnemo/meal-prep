@@ -44,4 +44,8 @@ export class ShoppingListComponent implements OnInit {
     this.searchText = event;
   }
 
+  onSwipe(event: any) {
+    console.log(event)
+  }
+
 }
