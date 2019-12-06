@@ -1,70 +1,72 @@
 <div fxLayoutAlign="center center">
-    <h3>
-        <span>{{pageTitle}}</span>
-    </h3>
+    <h3>{{pageTitle}}</h3>
 </div>
-<div class="form-card">
-    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit(recipeForm.value)">
-        <mat-card-content class="form" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
-            <div class="mat-form-field-container" fxLayoutAlign="start center">
-                <mat-form-field>
-                    <input matInput placeholder="Recipe title" formControlName="title">
-                    <mat-error *ngIf="error.title">{{error.title}}</mat-error>
-                </mat-form-field>
-            </div>
-            <div class="mat-form-field-container" fxLayoutAlign="start center" fxLayoutGap="10px">
-                <h3>Ingredients</h3>
-                <mat-icon (click)="addIngredient()">add_circle_outline</mat-icon>
-            </div>
 
-            <div formArrayName="ingredients" class="mat-form-field-container" fxLayout="column"
-                fxLayoutAlign="start center" *ngFor="let ingredient of ingredients.controls; let i=index">
-                <div [formGroupName]="i" fxLayoutGap="10px">
-                    <mat-form-field class="form-input-ingred">
-                        <input matInput placeholder="Ingredient" formControlName="name">
-                        <mat-error *ngIf="ingredient.get('name').errors?.required">Required.
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="form-input-quant">
-                        <input matInput placeholder="Nr" formControlName="quantity">
-                        <mat-error *ngIf="ingredient.get('quantity').errors?.required">Required.
-                        </mat-error>
-                        <mat-error *ngIf="ingredient.get('quantity').errors?.notInteger">Must be a number
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="form-input-type">
-                        <input matInput placeholder="type" formControlName="measurement">
-                        <mat-error *ngIf="ingredient.get('measurement').errors?.required">Required.
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-icon (click)="deleteIngredient(i)">remove_circle_outline</mat-icon>
-                </div>
-            </div>
-
-            <div class="mat-form-field-container" fxLayoutAlign="start center">
-                <h3>Instructions</h3>
-            </div>
-            <div class="mat-form-field-container" fxLayoutAlign="start center">
-                <mat-form-field>
-                    <textarea matInput placeholder="How to prepare" formControlName="instructions"
-                        cdkTextareaAutosize></textarea>
-                    <mat-error *ngIf="error.instructions">{{error.instructions}}</mat-error>
-                </mat-form-field>
-            </div>
-            <div class="mat-form-field-container" fxLayoutAlign="start center">
-                <mat-form-field>
-                    <input matInput placeholder="Link" formControlName="links">
-                </mat-form-field>
-            </div>
-
-            <mat-error *ngIf="recipeForm.errors?.ingredients">You need at least one ingredient!</mat-error>
-
-            <mat-card-actions fxLayoutGap="10px">
-                <button mat-raised-button color="primary" type="submit" [disabled]="recipeForm.invalid"
-                    color="primary">Submit</button>
-                <button mat-raised-button color="warn" type="button" [routerLink]="['/recipes']">Cancel</button>
-            </mat-card-actions>
-
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit(recipeForm.value)">
+    <mat-card class='title'>
+        <mat-card-content class="form" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field>
+                <input matInput placeholder="Recipe title" formControlName="title">
+                <mat-error *ngIf="error.title">{{error.title}}</mat-error>
+            </mat-form-field>
         </mat-card-content>
-    </form>
-</div>
+    </mat-card>
+
+    <mat-card formArrayName="ingredients" class="ingredients" fxLayout="column" fxLayoutAlign="start center"
+        *ngFor="let ingredient of ingredients.controls; let i=index">
+        <mat-card-content>
+            <div [formGroupName]="i">
+                <mat-form-field>
+                    <input matInput placeholder="Ingredient" formControlName="name">
+                    <mat-error *ngIf="ingredient.get('name').errors?.required">Required.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Nr" formControlName="quantity">
+                    <mat-error *ngIf="ingredient.get('quantity').errors?.required">Required.
+                    </mat-error>
+                    <mat-error *ngIf="ingredient.get('quantity').errors?.notInteger">Must be a number
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="type" formControlName="measurement">
+                    <mat-error *ngIf="ingredient.get('measurement').errors?.required">Required.
+                    </mat-error>
+                </mat-form-field>
+                <button mat-button type="button" (click)="deleteIngredient(i)">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                </button>
+
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="ingredients">
+        <mat-card-content>
+            <button type="button" mat-button (click)="addIngredient()">Add another ingredient</button>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="instructions">
+        <mat-card-content>
+            <mat-form-field>
+                <textarea matInput placeholder="How to prepare" formControlName="instructions"
+                    cdkTextareaAutosize></textarea>
+                <mat-error *ngIf="error.instructions">{{error.instructions}}</mat-error>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="instructions">
+        <mat-form-field>
+            <input matInput placeholder="Link" formControlName="links">
+        </mat-form-field>
+    </mat-card>
+
+    <mat-error *ngIf="recipeForm.errors?.ingredients">You need at least one ingredient!</mat-error>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <button mat-raised-button color="primary" type="submit" [disabled]="recipeForm.invalid"
+            color="primary">Submit</button>
+        <button mat-raised-button color="warn" type="button" [routerLink]="['/recipes']">Cancel</button>
+    </mat-card-actions>
+</form>
