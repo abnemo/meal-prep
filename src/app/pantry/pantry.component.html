@@ -4,6 +4,6 @@
 <mp-filter-textbox (searchFilter)="getSearch($event)"></mp-filter-textbox>
 <mp-float-button [data]="data" (added)="onAdd($event)"></mp-float-button>
 
-<div *ngFor="let ingredient of pantry | filter: searchText">
+<div class="pantry-ingredient" *ngFor="let ingredient of pantry | filter: searchText">
     <mp-ingredient-card [ingredient]="ingredient" [ingredientList]="pantry"></mp-ingredient-card>
 </div>

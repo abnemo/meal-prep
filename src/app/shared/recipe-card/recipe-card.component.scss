@@ -3,6 +3,7 @@
 mat-card {
     @include card-full-width;
     mat-card-content {
+        white-space: pre-wrap;
         // overflow: hidden;
         // max-height: 100px;
         .bottom-fade {
@@ -13,4 +14,21 @@ mat-card {
             height: 50px;
         }
     }
+}
+
+.ribbon-wrapper-featured {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.ribbon-featured {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 50px 50px 0;
+    border-color: transparent #f1c40f transparent transparent;
+    line-height: 0px;
 }

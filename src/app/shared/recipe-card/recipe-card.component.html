@@ -1,8 +1,13 @@
 <mat-card>
+    <div *ngIf="recipe.inPrep" class="ribbon-wrapper-featured">
+        <div class="ribbon-featured">
+            <!-- <mat-icon>check</mat-icon> -->
+        </div>
+    </div>
     <div [routerLink]="['/recipes',recipe.id]">
         <mat-card-header fxLayout="row" fxLayoutAlign="space-between">
             <mat-card-title>{{recipe.title}}</mat-card-title>
-            <mat-icon [ngStyle]="{'color': recipe.inPrep ? 'red' : 'black' }">restaurant</mat-icon>
+            <!-- <mat-icon [ngStyle]="{'color': recipe.inPrep ? 'red' : 'black' }">restaurant</mat-icon> -->
         </mat-card-header>
         <mat-card-content>
             {{recipe.instructions}}
