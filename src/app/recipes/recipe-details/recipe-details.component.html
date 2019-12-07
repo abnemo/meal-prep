@@ -1,29 +1,32 @@
-<mat-card *ngIf="recipe">
-    <mat-card-header fxLayout="row" fxLayoutAlign="center center">
-        <mat-card-title>
-            {{recipe?.title}}
-        </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+<div *ngIf="recipe">
+    <mat-card>
+        <mat-card-header fxLayout="row" fxLayoutAlign="center center">
+            <mat-card-title>
+                {{recipe?.title}}
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
 
-        <ul class="ingredients" *ngFor="let elem of recipe.ingredients">
-            <li>
-                {{elem?.quantity}}
-                {{elem?.measurement}}
-                {{elem?.name}}
-            </li>
-        </ul>
+            <ul class="ingredients" fxLayout="row wrap">
+                <li *ngFor="let elem of recipe.ingredients">
+                    {{elem?.quantity}}
+                    {{elem?.measurement}}
+                    {{elem?.name}}
+                </li>
+            </ul>
 
-        <div class="instructions">
-            {{recipe?.instructions}}
-        </div>
-        <div class="instructions">
-            <a href="{{link}}" target="_blank">{{link}}</a>
-        </div>
-    </mat-card-content>
-</mat-card>
+            <div class="instructions">
+                {{recipe?.instructions}}
+            </div>
+            <div class="instructions">
+                <a href="{{link}}" target="_blank">{{link}}</a>
+            </div>
+        </mat-card-content>
+    </mat-card>
 
-<mat-card-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-    <button mat-raised-button color="primary" type="button" [routerLink]="['/recipes', recipe.id, 'edit']">Edit</button>
-    <button mat-raised-button color="warn" type="button" (click)="removeRecipe(recipe.id)">Delete</button>
-</mat-card-actions>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <button mat-raised-button color="primary" type="button"
+            [routerLink]="['/recipes', recipe.id, 'edit']">Edit</button>
+        <button mat-raised-button color="warn" type="button" (click)="removeRecipe(recipe.id)">Delete</button>
+    </mat-card-actions>
+</div>

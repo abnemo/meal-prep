@@ -5,7 +5,7 @@ import { Ingredient } from 'src/app/core/models/ingredient.model';
 import { integerValidator } from '../validators/checkInteger.validator';
 
 @Component({
-  selector: 'app-ingredient-dialog',
+  selector: 'mp-ingredient-dialog',
   templateUrl: './ingredient-dialog.component.html',
   styleUrls: ['./ingredient-dialog.component.scss']
 })

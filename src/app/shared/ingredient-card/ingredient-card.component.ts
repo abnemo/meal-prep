@@ -22,7 +22,6 @@ export class IngredientCardComponent implements OnInit {
   ngOnInit() { }
 
   editIngredient(ingredient: Ingredient) {
-    console.log(ingredient)
     const dialogConfig = new MatDialogConfig();
     dialogConfig.height = '550px';
     dialogConfig.width = '400px';
