@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API: 'test'
+  API: 'https://meal-prep-api.experiments.explabs.io/v1'
 };
