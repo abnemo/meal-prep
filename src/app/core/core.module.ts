@@ -17,7 +17,7 @@ const JWTConfig = {
   config: {
     tokenGetter: jwtTokenGetter,
     whitelistedDomains:
-      ['localhost:9100', 'meal-prep.experiments.explabs.io']
+      ['localhost:9100', 'meal-prep-api.experiments.explabs.io']
   }
 }
 
